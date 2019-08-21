@@ -1,5 +1,5 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const axios = require('axios');
 const queryString = require ('query-string');
 const crypto = require('crypto');
@@ -40,13 +40,13 @@ function makeApiCall(methodParams, httpMethod = 'GET') {
   };
   queryParams['oauth_signature'] = getSignature(queryParams, httpMethod);
   return axios.get(`${API_PATH}?${queryString.stringify(queryParams)}`)
-    .then(resp => console.log(resp.data))
+    .then(resp => resp.data)
     .catch(err=> console.log(err));
 }
 
-async function searchFood(query, maxResults=1){
+async function searchRecipe(query, maxResults=2){
   const methodParams = {
-    method: 'foods.search',
+    method: 'recipes.search',
     max_results: maxResults,
     search_expression: query
   }
@@ -54,10 +54,10 @@ async function searchFood(query, maxResults=1){
   return response;
 }
 
-// console.log(searchFood('toast'));
-
-app.get('/express_backend', (req,res) => {
-  res.send({express:'Express backend is connected to React'});
+app.get('/recipes/:ingred1?', (req,res) => {
+  searchRecipe(req.params.ingred1)
+    .then(data=>res.send(data))
+    .catch(err=>res.send(err));
 })
 
 app.listen(8000, () => console.log('listening on 8000'));

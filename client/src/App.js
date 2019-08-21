@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Recipes from './containers/Recipes/Recipes';
+import RecipesMain from './containers/RecipesMain/RecipesMain';
 
 import './App.css';
 
@@ -27,7 +27,7 @@ class App extends React.Component {
               </ul>
             </nav>
             <Route path = '/' exact component={Home}/>
-            <Route path = '/recipes' component={Recipes}/>
+            <Route path = '/recipes' component={RecipesMain}/>
             <Route path = '/login' component={Login}/>
           </div>
         </Router>
