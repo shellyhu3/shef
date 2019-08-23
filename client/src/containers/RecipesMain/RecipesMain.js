@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import RecipesList from '../../components/RecipesList/RecipesList';
 
+
 class RecipesMain extends React.Component {
   constructor() {
     super();
@@ -46,10 +47,10 @@ class RecipesMain extends React.Component {
 
   render() {
     return(
-      <div>
-       <h1>Recipes</h1>
+      <div className='container'>
+       <p className='title'>Recipes</p>
        <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
-       <RecipesList recipes={this.state.recipes}/>
+       <RecipesList pathMatch={this.props.match} recipes={this.state.recipes}/>
     </div>
     )
   }

@@ -1,28 +1,43 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
+
 import RecipeCard from './RecipeCard/RecipeCard';
+import RecipeDetail from './RecipeDetail/RecipeDetail';
+
+
 import './RecipesList.css';
 
-const RecipesList = ({recipes}) => {
+const RecipesList = ({recipes, pathMatch}) => {
   return(
     <div className='cardContainer'>
       {recipes.map(recipe => {
-        const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_url, recipe_nutrition} = recipe
+        const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
         return (
-          <RecipeCard
-            key = {recipe_id}
-            name = {recipe_name}
-            desc = {recipe_description}
-            img = {recipe_image}
-            url = {recipe_url}
-            nutri = {recipe_nutrition}
-          />
+          <Link to = {`${pathMatch.url}/${recipe_id}`} key = {recipe_id}>
+            <RecipeCard
+              name = {recipe_name}
+              desc = {recipe_description}
+              img = {recipe_image}
+              nutri = {recipe_nutrition}
+            />
+          </Link>
         )
       })}
-      {/* <RecipeCard/>
+
+
+      {/* <Link to = {`${pathMatch.url}/${id}`}>
+        <RecipeCard/>
+      </Link>
+
       <RecipeCard/>
       <RecipeCard/>
       <RecipeCard/>
       <RecipeCard/> */}
+
+
+      <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/>
+
+
     </div>
   )
 }

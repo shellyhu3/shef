@@ -44,7 +44,7 @@ function makeApiCall(methodParams, httpMethod = 'GET') {
     .catch(err=> console.log(err));
 }
 
-async function searchRecipe(query, maxResults=2){
+async function searchRecipe(query, maxResults=5){
   const methodParams = {
     method: 'recipes.search',
     max_results: maxResults,
@@ -54,10 +54,25 @@ async function searchRecipe(query, maxResults=2){
   return response;
 }
 
+async function getRecipe(query){
+  const methodParams = {
+    method: 'recipe.get',
+    recipe_id: query
+  }
+  const response = await makeApiCall(methodParams);
+  return response;
+}
+
 app.get('/recipes/:ingred1?', (req,res) => {
   searchRecipe(req.params.ingred1)
     .then(data=>res.send(data))
     .catch(err=>res.send(err));
+})
+
+app.get('/recipe/:recipe_id', (req, res) => {
+  getRecipe(req.params.recipe_id)
+  .then(data=>res.send(data))
+  .catch(err=>res.send(err));
 })
 
 app.listen(8000, () => console.log('listening on 8000'));

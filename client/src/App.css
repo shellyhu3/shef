@@ -1,20 +1,59 @@
+.container{
+  padding: 90px 20px 0;
+}
+
+
 nav{
   height: 60px;
   width: 100%;
-  background: gray;
   display: grid;
   align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+  position: fixed;
+  background-color: white;
+  z-index: 1;
 }
 
 nav ul{
   display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
-  list-style: none;
-  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  list-style-type: none;
+}
+
+.links{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
 }
 
+nav a{
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 0.9em;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: rgb(74, 79, 95);
+}
+
+.name{
+  font-size: 1.5em;
+  text-transform: lowercase;
+  letter-spacing: 0.4em;
+  font-weight: 600;
+}
+
 .title{
-  font-size: 2em;
-  padding-left: 15px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+a{
+  color: rgb(79, 92, 99);
+  text-decoration: none;
+}
+
+.italic{
+  font-style: italic;
 }
