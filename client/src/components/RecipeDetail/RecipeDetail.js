@@ -3,6 +3,8 @@ import './RecipeDetail.css';
 import serving_size from './serving_size.png';
 import timer from './timer.png';
 import calories from './calories.png';
+import macros from './macros.png';
+
 
 class RecipeDetail extends React.Component {
   constructor(){
@@ -62,24 +64,8 @@ class RecipeDetail extends React.Component {
     return body;
   }
 
-  
-  render(){
-    const {recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients, directions} = this.state.recipe;
-
-    let {recipe_image, preparation_time_min, cooking_time_min} = this.state.recipe;
-
-    const ingredientList = ingredients.ingredient.map((ingred, i) => {
-      return <li key={i}>{ingred.food_name} ({ingred.ingredient_description})</li>
-    })
-
-    const directionList = directions.direction.map((step, i) => {
-      return <li key={i}>Step {step.direction_number}: {step.direction_description}</li>
-    })
-    
-    if (!recipe_image) {
-      recipe_image = "https://www.medicalnewstoday.com/content//images/articles/324/324956/close-up-of-a-plate-of-food.jpg";
-    }
-
+  totalTime = () => {
+    let {preparation_time_min, cooking_time_min} = this.state.recipe;
     if(!preparation_time_min) {
       preparation_time_min = 0;
     }
@@ -88,46 +74,94 @@ class RecipeDetail extends React.Component {
       cooking_time_min = 0;
     }
 
-    let total_time;
     if (preparation_time_min === 0 && cooking_time_min === 0){
-      total_time = 'unknown';
+      return <p>unknown</p>
     } else {
-      total_time = Number(preparation_time_min) + Number(cooking_time_min);
+      return (
+        <div>
+          <p>{Number(preparation_time_min) + Number(cooking_time_min)} min</p>
+          <p>Prep: {preparation_time_min}</p>
+          <p>Cooking: {cooking_time_min}</p>
+        </div>
+      )
     }
+  }
+
+  getDirections = () => {
+    const {directions} = this.state.recipe;
+    if (Array.isArray(directions.direction)){
+      const directionsList = directions.direction.map((step, i) => {
+        return <li key={i}>Step {step.direction_number}: {step.direction_description}</li>
+      })
+      return directionsList;
+    } else {
+      return <li>Step {directions.direction.direction_number}: {directions.direction.direction_description}</li>
+    }
+  }
+ 
+  getImage = () => {
+    const {recipe_images} = this.state.recipe;
+    if (!recipe_images) {
+      return "https://www.medicalnewstoday.com/content//images/articles/324/324956/close-up-of-a-plate-of-food.jpg";
+    } else if (Array.isArray(recipe_images.recipe_image)) {
+      return recipe_images.recipe_image[0]
+    } else {
+      return recipe_images.recipe_image
+    }
+  }
+
+  
+  render(){
+    const {recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
+    let {preparation_time_min, cooking_time_min} = this.state.recipe;
+
+    const ingredientList = ingredients.ingredient.map((ingred, i) => {
+      return <li key={i}>{ingred.ingredient_description}</li>
+    })
+    
+    const total_time = Number(preparation_time_min) + Number(cooking_time_min);
 
     return(
       <div className='recipe_wrapper'>
         <div>
-          <img className='recipe_img_big' src={recipe_image} alt={recipe_name}/>
+          <img className='recipe_img_big' src={this.getImage()} alt={recipe_name}/>
         </div>
 
         <div className='recipe_body'>
           <div className='recipe_info'>
-            <p className='title'>{recipe_name}</p>
+            <p className='title recipe_name'>{recipe_name}</p>
+            {/* <button className='add_recipe'>Add to List</button> */}
 
             <hr></hr>
 
             <div className='icons_container'>
               <div>
                 <img className='icon' src={serving_size} alt={`makes ${number_of_servings} servings`}/>
-                <p>{number_of_servings} servings</p>
+                <p className='sm_title'>Servings</p>
+                <p>{number_of_servings}</p>
               </div>
 
               <div>
                 <img className='icon' src={timer} alt={`total time is ${total_time} minutes`}/>
-                <p>{total_time}</p>
-                <p>Prep Time (min): {preparation_time_min}</p>
-                <p>Cooking Time (min): {cooking_time_min}</p>
+                <p className='sm_title'>Time</p>
+                {this.totalTime()}
+                {/* <p>Prep Time (min): {preparation_time_min}</p>
+                <p>Cooking Time (min): {cooking_time_min}</p> */}
               </div>
 
               <div>
-                <img className='icon' src={calories} alt={`${serving_sizes.serving.calories}`}/>
+                <img className='icon' src={calories} alt={`${serving_sizes.serving.calories} calories`}/>
+                <p className='sm_title'>Calories ({serving_sizes.serving.serving_size})</p>
                 <p>{serving_sizes.serving.calories}</p>
-                <p>Nutrition Facts (per {serving_sizes.serving.serving_size}):</p>
+              </div>
+
+              <div>
+                <img className='icon' src={macros} alt={'macros'}/>
+                <p className='sm_title'>Macros</p>
                 <ul>
-                  <li>Protein: {serving_sizes.serving.protein}g</li>
-                  <li>Carbs: {serving_sizes.serving.carbohydrate}g</li>
-                  <li>Fat: {serving_sizes.serving.fat}g</li>
+                  <li>P: {serving_sizes.serving.protein}g</li>
+                  <li>C: {serving_sizes.serving.carbohydrate}g</li>
+                  <li>F: {serving_sizes.serving.fat}g</li>
                 </ul>
               </div>
             </div>
@@ -139,16 +173,16 @@ class RecipeDetail extends React.Component {
           </div>
 
           <div className='ingredient_list'>
-            <p className='bordered_title'>Ingredients</p>
+            <p className='thick_border'><span className='bordered_title'>Ingredients</span></p>
             <ul>
               {ingredientList}
             </ul>
           </div>
 
           <div className='direction_list'>
-            <p className='bordered_title'>Directions</p>
+            <p className='thick_border'><span className='bordered_title'>Directions</span></p>
             <ul>
-              {directionList}
+              {this.getDirections()}
             </ul>
           </div>
         </div>

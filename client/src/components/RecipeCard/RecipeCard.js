@@ -14,8 +14,8 @@ const RecipeCard = ({name, desc, img, nutri}) => {
     // </div>
     <div className='card'>
       <img className='recipe_img' src = {img} alt={desc}/>
-      <h1 className='title'>{name}</h1>
-      <p>Cal: {nutri.calories}, Protein: {nutri.protein}g, Carbs: {nutri.carbohydrate}g, Fat: {nutri.fat}g</p>
+      <p className='title'>{name}</p>
+      <p>Cal: {nutri.calories}, P: {nutri.protein}g, C: {nutri.carbohydrate}g, F: {nutri.fat}g</p>
     </div>
   )
 }

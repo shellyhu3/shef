@@ -13,6 +13,7 @@ nav{
   position: fixed;
   background-color: white;
   z-index: 1;
+  box-shadow: 0 15px 15px rgba(40, 40, 56, 0.062);
 }
 
 nav ul{
@@ -27,13 +28,14 @@ nav ul{
   align-items: center;
 }
 
-nav a{
+.nav_link{
   text-decoration: none;
   text-transform: lowercase;
   font-size: 0.9em;
   letter-spacing: 0.1em;
   text-align: center;
   color: rgb(74, 79, 95);
+  cursor: pointer;
 }
 
 .name{
@@ -44,7 +46,7 @@ nav a{
 }
 
 .title{
-  font-size: 1.2em;
+  font-size: 1.1em;
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
@@ -56,4 +58,20 @@ a{
 
 .italic{
   font-style: italic;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.error{
+  color: rgb(199, 81, 81);
+  font-size: 0.8em;
+  line-height: 2em;
+}
+
+@media only screen and (max-width: 700px){
+  .container{
+    font-size: 0.8em;
+  }
 }

@@ -3,7 +3,25 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const queryString = require ('query-string');
 const crypto = require('crypto');
+const cors  = require('cors');
+const bcrypt = require('bcrypt');
+const saltRounds= 10;
+const db = require('knex')({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'shell',
+    password: 'root',
+    database: 'shef'
+  }
+});
+
 const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+const register = require('./controllers/register');
+const login = require('./controllers/login');
 
 const API_PATH = 'https://platform.fatsecret.com/rest/server.api';
 const ACCESS_KEY = 'a1fa414bdaa846a898c93dea5d8b3477';
@@ -65,14 +83,19 @@ async function getRecipe(query){
 
 app.get('/recipes/:ingred1?', (req,res) => {
   searchRecipe(req.params.ingred1)
-    .then(data=>res.send(data))
-    .catch(err=>res.send(err));
+    .then(data=>res.json(data))
+    .catch(err=>res.json(err));
 })
 
 app.get('/recipe/:recipe_id', (req, res) => {
   getRecipe(req.params.recipe_id)
-  .then(data=>res.send(data))
-  .catch(err=>res.send(err));
+  .then(data=>res.json(data))
+  .catch(err=>res.json(err));
 })
+
+
+app.post('/login', login.handleLogin(db, bcrypt))
+
+app.post('/register', register.handleRegister(db, bcrypt, saltRounds))
 
 app.listen(8000, () => console.log('listening on 8000'));

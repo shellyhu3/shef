@@ -36,11 +36,9 @@ class RecipesMain extends React.Component {
   }
 
   onSearchSubmit = () => {
-    console.log(this.state.searchField);
     this.callBackendAPI(this.state.searchField)
       .then(resp => {
         this.setState({recipes: resp.recipes.recipe})
-        console.log(resp.recipes.recipe)
       })
       .catch(err => console.log(err));
   }

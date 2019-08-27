@@ -1,0 +1,134 @@
+.recipe_wrapper{
+  position: absolute;
+  left: 0;
+  top: 500px;
+  /* background: yellow; */
+  /* padding-bottom: 30px; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.recipe_wrapper ul{
+  list-style: none;
+}
+
+.recipe_body{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px 50px 0;
+  margin-bottom: 20px;
+}
+
+.recipe_info{
+  grid-column: 1 / span 2;
+  padding-bottom: 15px;
+}
+
+.recipe_img_big{
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.icon{
+  display: block;
+  margin: 0 auto 5px;
+  width: 25%;
+}
+
+.icons_container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+
+hr{
+  margin: 15px;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.ingredient_list{
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-width: thin;
+}
+
+.ingredient_list, .direction_list{
+  padding: 0 25px;
+  text-align: left;
+}
+
+.ingredient_list li, .direction_list li{
+  padding: 5px 0;
+}
+
+.ingredient_list ul, .direction_list ul{
+  padding: 15px 0 0;
+}
+
+.bordered_title{
+  text-align: center;
+  border: thin solid black;
+  line-height: 2.3em;
+  display: block;
+  text-transform: uppercase;
+}
+
+.thick_border{
+  border: 2px solid black;
+  padding: 3px;
+}
+
+.sm_title{
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  line-height: 2em;
+}
+
+.add_recipe{
+  line-height: 2.5em;
+  background: transparent;
+  border: thin solid black;
+  cursor: pointer;
+  padding: 0 15px;
+  float: right;
+}
+
+.add_recipe:hover{
+  background-color: rgba(40, 40, 56, 0.062);
+}
+
+@media only screen and (max-width: 900px){
+  .recipe_wrapper{
+    top: 500px;
+    grid-template-columns: 1fr;
+  }
+
+  .recipe_body{
+    padding: 0;
+  }
+
+  .recipe_name{
+    padding-top: 10px;
+  }
+
+  .recipe_img_big{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .recipe_wrapper{
+    top: 400px;
+    grid-template-columns: 1fr;
+  }
+
+  .recipe_img_big{
+    height: 300px;
+  }
+}
