@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, Link, withRouter, Redirect } from 'react-router-dom';
 import 'tachyons';
 import RecipesMain from './containers/RecipesMain/RecipesMain';
 import Home from './components/Home/Home';
+import MealPlans from './containers/MealPlans/MealPlans';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
 
@@ -28,14 +29,16 @@ class App extends React.Component {
 
   loadUser = (data) => {
     const {id, first_name, last_name, email, joined_at, updated_at} = data;
-    this.setState({user: {
+    this.setState({
+      user: {
         id: id,
         first_name: first_name,
         last_name: last_name,
         email: email,
         joined: joined_at,
         updated: updated_at
-      }, isLoggedIn: true})
+      }, 
+      isLoggedIn: true})
   }
 
   logout = () => {
@@ -54,14 +57,24 @@ class App extends React.Component {
               <Link to='/' className='nav_link'>Home</Link>
               <Link to='/recipes' className='nav_link'>Recipes</Link>
               {this.state.isLoggedIn ? 
-                <p onClick={this.logout} className='nav_link'>Logout</p>
-                : <Link to='/login' className='nav_link'>Login</Link>
+                <div>
+                  <p onClick={this.logout} className='nav_link'>Logout</p>
+                  <Link to='/plans' className='nav_link'>Meal Plans</Link>                
+                </div>
+                : 
+                <Link to='/login' className='nav_link'>Login</Link>
               }
             </li>
           </ul>
         </nav>
         <Route path = '/' exact render={() => <Home user={this.state.user}/>}/>
-        <Route path = '/recipes' component={RecipesMain}/>
+        <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
+        <Route path = '/plans' render={() => {
+          return this.state.isLoggedIn ?
+            <MealPlans user={this.state.user}/>
+            :
+            <Redirect to='/login'/>
+        }}/>
         <Route path = '/login' render={() => <Login loadUser = {this.loadUser} />}/>
         <Route path = '/register' render={() => <Register loadUser = {this.loadUser} />}/>
       </div>

@@ -22,6 +22,7 @@ app.use(cors());
 
 const register = require('./controllers/register');
 const login = require('./controllers/login');
+const meals = require('./controllers/meals');
 
 const API_PATH = 'https://platform.fatsecret.com/rest/server.api';
 const ACCESS_KEY = 'a1fa414bdaa846a898c93dea5d8b3477';
@@ -97,5 +98,9 @@ app.get('/recipe/:recipe_id', (req, res) => {
 app.post('/login', login.handleLogin(db, bcrypt))
 
 app.post('/register', register.handleRegister(db, bcrypt, saltRounds))
+
+app.post('/meals', meals.addMeals(db))
+
+app.get('/meals', meals.getMeals(db))
 
 app.listen(8000, () => console.log('listening on 8000'));

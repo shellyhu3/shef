@@ -4,11 +4,12 @@ import serving_size from './serving_size.png';
 import timer from './timer.png';
 import calories from './calories.png';
 import macros from './macros.png';
+import add from '../RecipesList/add.png';
 
 
 class RecipeDetail extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       recipe: {
         recipe_name: '',
@@ -123,14 +124,14 @@ class RecipeDetail extends React.Component {
 
     return(
       <div className='recipe_wrapper'>
-        <div>
+        <div className='img_bg'>
           <img className='recipe_img_big' src={this.getImage()} alt={recipe_name}/>
         </div>
 
         <div className='recipe_body'>
           <div className='recipe_info'>
+            <button onClick={() => this.props.addRecipe(this.props.match.params.id)} className='add_recipe'><img src={add} alt='add to plan'/>Add</button>
             <p className='title recipe_name'>{recipe_name}</p>
-            {/* <button className='add_recipe'>Add to List</button> */}
 
             <hr></hr>
 
@@ -168,7 +169,7 @@ class RecipeDetail extends React.Component {
 
             <hr></hr>
 
-            <p className='italic'>{recipe_description}</p>
+            <p className='italic recipe_desc'>{recipe_description}</p>
 
           </div>
 

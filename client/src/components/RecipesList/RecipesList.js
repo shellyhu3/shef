@@ -8,7 +8,7 @@ import cook from './cook.png';
 
 import './RecipesList.css';
 
-const RecipesList = ({recipes, pathMatch}) => {
+const RecipesList = ({recipes, pathMatch, addRecipe}) => {
   if (recipes.length === 0){
     return (
       <div className='card_container_blank'>
@@ -30,7 +30,8 @@ const RecipesList = ({recipes, pathMatch}) => {
           <p className='med_title bold'>Meal Prep</p>
         </div>
 
-        <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/>
+        <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} addRecipe={addRecipe} />}/>
+        {/* <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/> */}
 
       </div>
     )

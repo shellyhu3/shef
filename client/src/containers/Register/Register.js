@@ -46,7 +46,7 @@ class Register extends React.Component {
       .then(data => {
         if (data.id) {
           this.props.loadUser(data);
-          this.props.history.push('/');
+          this.props.history.goBack();
         } else {
           this.setState({errors: data});
         }
@@ -65,6 +65,7 @@ class Register extends React.Component {
           <form className="measure center">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f4 fw6 ph0 mh0">Register</legend>
+              {this.state.errors ? <p className='error'>{this.state.errors.register}</p> : ''}
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="first-name">First Name</label>
                 <input 
