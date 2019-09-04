@@ -18,17 +18,24 @@ nav{
 
 nav ul{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   list-style-type: none;
 }
 
-.links{
+.links_logged_out{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
 }
 
+.links_logged_in{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+
 .nav_link{
+  display: block;
   text-decoration: none;
   text-transform: lowercase;
   font-size: 0.9em;

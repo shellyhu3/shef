@@ -53,18 +53,20 @@ class App extends React.Component {
         <nav>
           <ul>
             <li className='name'>Shef</li>
-            <li className='links'>
-              <Link to='/' className='nav_link'>Home</Link>
-              <Link to='/recipes' className='nav_link'>Recipes</Link>
-              {this.state.isLoggedIn ? 
-                <div>
-                  <p onClick={this.logout} className='nav_link'>Logout</p>
-                  <Link to='/plans' className='nav_link'>Meal Plans</Link>                
-                </div>
-                : 
+            {this.state.isLoggedIn ? 
+              <li className='links_logged_in'>
+                <Link to='/' className='nav_link'>Home</Link>
+                <Link to='/recipes' className='nav_link'>Recipes</Link>
+                <Link to='/plans' className='nav_link'>Meal Plans</Link>
+                <p onClick={this.logout} className='nav_link'>Logout</p>
+              </li>
+              : 
+              <li className='links_logged_out'>              
+                <Link to='/' className='nav_link'>Home</Link>
+                <Link to='/recipes' className='nav_link'>Recipes</Link>
                 <Link to='/login' className='nav_link'>Login</Link>
-              }
-            </li>
+              </li>
+            }
           </ul>
         </nav>
         <Route path = '/' exact render={() => <Home user={this.state.user}/>}/>

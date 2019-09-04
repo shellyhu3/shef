@@ -46,7 +46,8 @@ class Register extends React.Component {
       .then(data => {
         if (data.id) {
           this.props.loadUser(data);
-          this.props.history.goBack();
+          this.props.history.push('/plans');
+          // this.props.history.goBack();
         } else {
           this.setState({errors: data});
         }
