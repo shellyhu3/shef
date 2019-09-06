@@ -1,4 +1,4 @@
-const handleRegister = (db, bcrypt, saltRounds) => (req, res) => {
+const handleRegister = (db, bcrypt, saltRounds, jwt, TOKEN_SECRET) => (req, res) => {
   let errors = {};
   const { first_name, last_name, email, pw } = req.body;
 
@@ -36,11 +36,11 @@ const handleRegister = (db, bcrypt, saltRounds) => (req, res) => {
         } 
       } else {
         if (Object.keys(errors).length != 0) {
+          console.log(errors)
           return res.json(errors);
         } 
         //if email doesn't exist
         const hash = bcrypt.hashSync(pw, saltRounds);
-        
         db.transaction(trx => {
           trx.insert({
             hash: hash,
@@ -57,7 +57,11 @@ const handleRegister = (db, bcrypt, saltRounds) => (req, res) => {
                 email: loginEmail[0]
               }, '*')
               .then(user => {
-                res.json(user[0]);
+                const token = jwt.sign({id: user[0].id}, TOKEN_SECRET);
+                res.header('auth-token', token).json({
+                  token: token,
+                  user: user[0]
+                });
               })
           })
           .then(trx.commit)

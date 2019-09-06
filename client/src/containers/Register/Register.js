@@ -13,6 +13,12 @@ class Register extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (localStorage.getItem('jwt_token')) {
+      this.props.history.push('/');
+    }
+  }
+
   onFNChange = (event) => {
     this.setState({first_name: event.target.value})
   }
@@ -44,8 +50,11 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.id) {
-          this.props.loadUser(data);
+        if (data.user) {
+          const token = data.token;
+          localStorage.setItem('jwt_token', token);
+          localStorage.setItem('user', data.user.first_name);
+          this.props.loadUser(data.user);
           this.props.history.push('/plans');
           // this.props.history.goBack();
         } else {

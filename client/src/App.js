@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route, Link, withRouter, Redirect } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import 'tachyons';
 import RecipesMain from './containers/RecipesMain/RecipesMain';
 import Home from './components/Home/Home';
-import MealPlans from './containers/MealPlans/MealPlans';
+import MealPlans from './components/MealPlans/MealPlans';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
 
 import './App.css';
 
@@ -27,6 +29,20 @@ class App extends React.Component {
     this.state = initialState;
   }
 
+  componentDidMount() {
+    const jwt = this.getJwt();
+    if(jwt) {
+      this.setState({isLoggedIn: true})
+      console.log('is logged in') 
+    } else {
+    console.log('not logged in')
+    }
+  }
+
+  getJwt = () => {
+    return localStorage.getItem('jwt_token');
+  }
+
   loadUser = (data) => {
     const {id, first_name, last_name, email, joined_at, updated_at} = data;
     this.setState({
@@ -43,9 +59,10 @@ class App extends React.Component {
 
   logout = () => {
     this.setState(initialState);
+    localStorage.removeItem('jwt_token');
+    localStorage.removeItem('user');
     this.props.history.push('/');
   }
-
 
   render() {
     return (
@@ -69,14 +86,9 @@ class App extends React.Component {
             }
           </ul>
         </nav>
-        <Route path = '/' exact render={() => <Home user={this.state.user}/>}/>
-        <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
-        <Route path = '/plans' render={() => {
-          return this.state.isLoggedIn ?
-            <MealPlans user={this.state.user}/>
-            :
-            <Redirect to='/login'/>
-        }}/>
+        <Route path = '/' exact render={() => <Home user={this.state.user} />} />
+        <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn} />} />
+        <PrivateRoute path = '/plans' component={MealPlans} />
         <Route path = '/login' render={() => <Login loadUser = {this.loadUser} />}/>
         <Route path = '/register' render={() => <Register loadUser = {this.loadUser} />}/>
       </div>

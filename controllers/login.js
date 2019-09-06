@@ -1,4 +1,4 @@
-const handleLogin = (db, bcrypt) => (req, res) => {
+const handleLogin = (db, bcrypt, jwt, TOKEN_SECRET) => (req, res) => {
   let errors = {};
   const { email, pw } = req.body;
   db.select('email', 'hash').from('login')
@@ -9,7 +9,13 @@ const handleLogin = (db, bcrypt) => (req, res) => {
         return db.select('*').from('users')
           .where({email: email})
           .then(user => {
-            return res.json(user[0])
+            //Login success
+            //Create and assign token
+            const token = jwt.sign({id: user[0].id}, TOKEN_SECRET);
+            res.header('auth-token', token).json({
+              token: token,
+              user: user[0]
+            });
           })
           .catch(err => {
             errors.login = 'unable to get user';
