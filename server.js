@@ -44,6 +44,6 @@ app.post('/register', register.handleRegister(db, bcrypt, saltRounds, jwt, TOKEN
 
 app.post('/meals', meals.addMeals(db))
 
-app.get('/meals', meals.getMeals(db))
+app.get('/meals/:id', meals.getMeals(db))
 
 app.listen(8000, () => console.log('listening on 8000'));

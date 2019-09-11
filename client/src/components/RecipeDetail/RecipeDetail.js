@@ -32,7 +32,7 @@ class RecipeDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log('print',this.props.match.params.id, this.state.recipe);
+    console.log('print',this.props.match.url);
     const search_id = this.props.match.params.id;
     this.callBackendAPI(search_id)
     .then(resp => {
@@ -113,7 +113,7 @@ class RecipeDetail extends React.Component {
 
   
   render(){
-    const {recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
+    const {recipe_id, recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
     let {preparation_time_min, cooking_time_min} = this.state.recipe;
 
     const ingredientList = ingredients.ingredient.map((ingred, i) => {
@@ -121,6 +121,11 @@ class RecipeDetail extends React.Component {
     })
     
     const total_time = Number(preparation_time_min) + Number(cooking_time_min);
+
+    const cals = serving_sizes.serving.calories;
+    const protein = serving_sizes.serving.protein;
+    const carbs = serving_sizes.serving.carbohydrate;
+    const fat = serving_sizes.serving.fat;
 
     return(
       <div className='recipe_wrapper'>
@@ -130,7 +135,7 @@ class RecipeDetail extends React.Component {
 
         <div className='recipe_body'>
           <div className='recipe_info'>
-            <button onClick={() => this.props.addRecipe(this.props.match.params.id)} className='add_recipe'><img src={add} alt='add to plan'/>Add</button>
+            <button onClick={() => this.props.addRecipe(recipe_id, recipe_name, cals, protein, carbs, fat)} className='add_recipe'><img src={add} alt='add to plan'/>Add</button>
             <p className='title recipe_name'>{recipe_name}</p>
 
             <hr></hr>
@@ -151,18 +156,18 @@ class RecipeDetail extends React.Component {
               </div>
 
               <div>
-                <img className='icon' src={calories} alt={`${serving_sizes.serving.calories} calories`}/>
+                <img className='icon' src={calories} alt={`${cals} calories`}/>
                 <p className='sm_title'>Calories ({serving_sizes.serving.serving_size})</p>
-                <p>{serving_sizes.serving.calories}</p>
+                <p>{cals}</p>
               </div>
 
               <div>
                 <img className='icon' src={macros} alt={'macros'}/>
                 <p className='sm_title'>Macros</p>
                 <ul>
-                  <li>P: {serving_sizes.serving.protein}g</li>
-                  <li>C: {serving_sizes.serving.carbohydrate}g</li>
-                  <li>F: {serving_sizes.serving.fat}g</li>
+                  <li>P: {protein}g</li>
+                  <li>C: {carbs}g</li>
+                  <li>F: {fat}g</li>
                 </ul>
               </div>
             </div>

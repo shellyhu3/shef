@@ -3,7 +3,7 @@ import { Route, Link, withRouter } from 'react-router-dom';
 import 'tachyons';
 import RecipesMain from './containers/RecipesMain/RecipesMain';
 import Home from './components/Home/Home';
-import MealPlans from './components/MealPlans/MealPlans';
+import MealPlans from './containers/MealPlans/MealPlans';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';

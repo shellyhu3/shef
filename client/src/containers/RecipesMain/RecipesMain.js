@@ -44,15 +44,19 @@ class RecipesMain extends React.Component {
       .catch(err => console.log(err));
   }
 
-  addRecipe = (recipe_id) => {
+  addRecipe = (recipe_id, recipe_name, cals, protein, carbs, fat) => {
     if (this.props.isLoggedIn) {
-      console.log('logged in', recipe_id)
       fetch('http://localhost:8000/meals', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          user_id: this.props.user.id,
-          foods_id: recipe_id
+          user_id: localStorage.getItem('id'),
+          recipe_id: recipe_id,
+          name: recipe_name,
+          cals: cals,
+          protein: protein,
+          carbs: carbs,
+          fat: fat,
         })
       })
         .then(response => response.json())

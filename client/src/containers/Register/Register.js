@@ -54,6 +54,7 @@ class Register extends React.Component {
           const token = data.token;
           localStorage.setItem('jwt_token', token);
           localStorage.setItem('user', data.user.first_name);
+          localStorage.setItem('id', data.user.id);
           this.props.loadUser(data.user);
           this.props.history.push('/plans');
           // this.props.history.goBack();
