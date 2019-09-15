@@ -104,16 +104,26 @@ hr{
 }
 
 .add_recipe{
-  width: 30px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  font-size: 0.8em;
+  padding-bottom: 15px;
 }
 
-.add_recipe:hover{
+.add_recipe select:hover, .add_recipe select:focus{
+  background-color: rgba(40, 40, 56, 0.062);
+}
+
+.add_recipe button{
+  background: white;
+  border: thin solid black;
+  margin-left: 8px;
+  padding: 2px 5px;
+  vertical-align: top;
+}
+
+.add_recipe button:focus{
+  outline: none;
+}
+
+.add_recipe button:hover{
   background-color: rgba(40, 40, 56, 0.062);
 }
 
@@ -131,10 +141,6 @@ hr{
     width: 100%;
     height: 400px;
     object-fit: cover;
-  }
-
-  .add_recipe{
-    right: 25px;
   }
 
   .ingredient_list, .direction_list{

@@ -1,5 +1,6 @@
 const addMeals = (db) => (req, res) => {
-  const {user_id, recipe_id, name, cals, protein, carbs, fat} = req.body;
+  const errors = {};
+  const {user_id, recipe_id, name, cals, protein, carbs, fat, day_of_wk, time_of_day} = req.body;
   db('foods')
     .where({
       recipe_id: recipe_id
@@ -37,12 +38,17 @@ const addMeals = (db) => (req, res) => {
           .returning('*')
           .insert({
             plan_id: data[0].plan_id,
-            recipe_id: recipe_id
+            recipe_id: recipe_id,
+            day_of_wk: day_of_wk,
+            time_of_day: time_of_day
           })
           .then(meal => {
             res.json(meal[0]);
           })
-          .catch(err => res.json(err))
+          .catch(err => {
+            errors.meal = 'meal exists already (choose a different time)';
+            res.json(errors)
+          })
       } else {
         console.log('plan not found')
         db.transaction(trx => {
@@ -54,13 +60,15 @@ const addMeals = (db) => (req, res) => {
             .then(plan_id => {
               console.log('new plan', plan_id[0], recipe_id)
               return trx('meals')
-                .returning('recipe_id')
+                .returning('*')
                 .insert({
                   plan_id: plan_id[0],
-                  recipe_id: recipe_id
+                  recipe_id: recipe_id,
+                  day_of_wk: day_of_wk,
+                  time_of_day: time_of_day
                 })
                 .then(meal => {
-                  res.json(meal)
+                  res.json(meal[0])
                 })
             })
             .then(trx.commit)
@@ -72,7 +80,7 @@ const addMeals = (db) => (req, res) => {
 }
 
 const getMeals = (db) => (req, res) => {
-  const user_id = req.params.id;
+  const user_id = req.params.user_id;
   db('meal_plans')
     .where({
       user_id: user_id
@@ -90,7 +98,19 @@ const getMeals = (db) => (req, res) => {
     .catch(err => res.json(''))
 }
 
+const deleteMeal = (db) => (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  db('meals')
+    .where({
+      id: id
+    })
+    .del()
+    .then(console.log)
+}
+
 module.exports = {
   addMeals,
-  getMeals
+  getMeals,
+  deleteMeal
 }

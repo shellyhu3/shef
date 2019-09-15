@@ -9,18 +9,13 @@ class RecipesMain extends React.Component {
     super(props);
     this.state = {
       searchField: '',
-      recipes:[]
+      recipes:[],
     }
   }
 
-  // componentDidMount() {
-  //   this.callBackendAPI()
-  //     .then(resp => {
-  //       this.setState({recipes: resp})
-  //       console.log(resp.recipes)
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  componentDidMount() {
+    console.log('Recipes Main mounted')
+  }
 
   callBackendAPI = async (search) => {
     const response = await fetch(`/recipes/${search}`);
@@ -44,36 +39,12 @@ class RecipesMain extends React.Component {
       .catch(err => console.log(err));
   }
 
-  addRecipe = (recipe_id, recipe_name, cals, protein, carbs, fat) => {
-    if (this.props.isLoggedIn) {
-      fetch('http://localhost:8000/meals', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          user_id: localStorage.getItem('id'),
-          recipe_id: recipe_id,
-          name: recipe_name,
-          cals: cals,
-          protein: protein,
-          carbs: carbs,
-          fat: fat,
-        })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-        })
-    } else{
-      this.props.history.push('/login');
-    }
-  }
-
   render() {
     return(
       <div className='container'>
        <p className='title'>Recipes</p>
        <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
-       <RecipesList pathMatch={this.props.match} recipes={this.state.recipes} addRecipe={this.addRecipe}/>
+       <RecipesList pathMatch={this.props.match} recipes={this.state.recipes}/>
     </div>
     )
   }

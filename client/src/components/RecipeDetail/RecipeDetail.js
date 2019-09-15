@@ -4,8 +4,6 @@ import serving_size from './serving_size.png';
 import timer from './timer.png';
 import calories from './calories.png';
 import macros from './macros.png';
-import add from '../RecipesList/add.png';
-
 
 class RecipeDetail extends React.Component {
   constructor(props){
@@ -27,7 +25,11 @@ class RecipeDetail extends React.Component {
         directions: {
           direction: []
         }
-      }
+      },
+      errors: {},
+      success: '',
+      day_of_wk: 'Monday',
+      time_of_day: 'Breakfast'
     }
   }
 
@@ -48,6 +50,8 @@ class RecipeDetail extends React.Component {
       const search_id = this.props.match.params.id;
       this.callBackendAPI(search_id)
       .then(resp => {
+        this.setState({errors: {}});
+        this.setState({success: ''});
         this.setState({recipe: resp.recipe})
         console.log('heres the recipe', resp.recipe)
       })
@@ -111,9 +115,52 @@ class RecipeDetail extends React.Component {
     }
   }
 
+  handleDayChange = (event) => {
+    this.setState({day_of_wk: event.target.value})
+  }
+
+  handleTimeChange = (event) => {
+    this.setState({time_of_day: event.target.value})
+  }
+
+  addRecipe = () => {
+    this.setState({errors: {}});
+    this.setState({success: ''});
+    const {recipe_id, recipe_name, serving_sizes} = this.state.recipe;
+    const {calories, protein, carbohydrate, fat} = serving_sizes.serving;
+    if (localStorage.getItem('jwt_token')) {
+      fetch('http://localhost:8000/meals', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          user_id: localStorage.getItem('id'),
+          recipe_id: recipe_id,
+          name: recipe_name,
+          cals: calories,
+          protein: protein,
+          carbs: carbohydrate,
+          fat: fat,
+          day_of_wk: this.state.day_of_wk,
+          time_of_day: this.state.time_of_day
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('data', data)
+          if(!data.id){
+            this.setState({errors: data})
+          } else {
+            this.setState({success: 'recipe successfully added'})
+          }
+        })
+    } else{
+      this.props.history.push('/login');
+    }
+  }
+
   
   render(){
-    const {recipe_id, recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
+    const {recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
     let {preparation_time_min, cooking_time_min} = this.state.recipe;
 
     const ingredientList = ingredients.ingredient.map((ingred, i) => {
@@ -135,9 +182,28 @@ class RecipeDetail extends React.Component {
 
         <div className='recipe_body'>
           <div className='recipe_info'>
-            <button onClick={() => this.props.addRecipe(recipe_id, recipe_name, cals, protein, carbs, fat)} className='add_recipe'><img src={add} alt='add to plan'/>Add</button>
             <p className='title recipe_name'>{recipe_name}</p>
-
+            <div className='add_recipe'>
+              <select defaultValue={this.state.day_of_wk} onChange={this.handleDayChange}>
+                <option value="Monday">M</option>
+                <option value="Tuesday">T</option>
+                <option value="Wednesday">W</option>
+                <option value="Thursday">Th</option>
+                <option value="Friday">F</option>
+                <option value="Saturday">Sa</option>
+                <option value="Sunday">Su</option>
+              </select>
+              <select defaultValue={this.state.time_of_day} onChange={this.handleTimeChange}>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Snack 1">Snack 1</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snack 2">Snack 2</option>
+                <option value="Dinner">Dinner</option>
+              </select>
+              <button onClick={this.addRecipe}>Add</button>
+            </div>
+            {this.state.errors ? <p className='error'>{this.state.errors.meal}</p> : ''}
+            {this.state.success ? <p className='success'>{this.state.success}</p> : ''}
             <hr></hr>
 
             <div className='icons_container'>

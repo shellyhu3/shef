@@ -29,14 +29,28 @@ class MealPlan extends React.Component {
       .then(data => {
         this.setState({meal_plan: data})
       })
+      .catch(err => console.log(err));
+  }
+
+  onDelete = (id) => {
+    const user_id = localStorage.getItem('id');
+    console.log(user_id)
+    fetch(`http://localhost:8000/meals/${id}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    })
+      .then(this.getPlan(user_id))
+      .catch(err => console.log(err));
   }
 
   render() {
+    console.log(this.state.meal_plan)
     const meals = this.state.meal_plan;
     if (meals.length) {
       return (
         <div className='container'>
           meal plans {this.state.user}!!!!!!!!!!!!!
+
           {meals.map(meal => {
             const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate} = meal;
             return <Meal 
@@ -49,6 +63,7 @@ class MealPlan extends React.Component {
               protein = {protein}
               fat = {fat}
               carbohydrate = {carbohydrate}
+              onDelete = {this.onDelete}
             />
           })}
 
@@ -56,18 +71,24 @@ class MealPlan extends React.Component {
             <thead>
               <tr>
                 <th></th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-                <th>Sunday</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>Th</th>
+                <th>F</th>
+                <th>Sa</th>
+                <th>Su</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th>Breakfast</th>
+              </tr>
+              <tr>
+                <th>Lunch</th>
+              </tr>
+              <tr>
+                <th>Dinner</th>
               </tr>
             </tbody>
           </table>
