@@ -1,4 +1,5 @@
 const handleLogin = (db, bcrypt, jwt, TOKEN_SECRET) => (req, res) => {
+  console.log('working')
   let errors = {};
   const { email, pw } = req.body;
   db.select('email', 'hash').from('login')

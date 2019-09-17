@@ -46,6 +46,8 @@ app.post('/meals', meals.addMeals(db))
 
 app.get('/meals/:user_id', meals.getMeals(db))
 
+app.get('/meals_details/:user_id', meals.getMealsDetails(db))
+
 app.delete('/meals/:id', meals.deleteMeal(db))
 
 app.listen(8000, () => console.log('listening on 8000'));

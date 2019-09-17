@@ -93,7 +93,63 @@ const getMeals = (db) => (req, res) => {
         .where({
           plan_id: data[0].plan_id
         })
+        .orderByRaw(
+          `CASE
+          WHEN day_of_wk = 'Monday' THEN 1
+          WHEN day_of_wk = 'Tuesday' THEN 2
+          WHEN day_of_wk = 'Wednesday' THEN 3
+          WHEN day_of_wk = 'Thursday' THEN 4
+          WHEN day_of_wk = 'Friday' THEN 5
+          WHEN day_of_wk = 'Saturday' THEN 6
+          WHEN day_of_wk = 'Sunday' THEN 7
+          END ASC`
+        )
+        .orderByRaw(
+          `CASE
+          WHEN time_of_day = 'Breakfast' THEN 1
+          WHEN time_of_day = 'Snack 1' THEN 2
+          WHEN time_of_day = 'Lunch' THEN 3
+          WHEN time_of_day = 'Snack 2' THEN 4
+          WHEN time_of_day = 'Dinner' THEN 5
+          END ASC`
+        )
         .then(data => res.send(data))
+    })
+    .catch(err => res.json(''))
+}
+
+const getMealsDetails = (db) => (req, res) => {
+  const user_id = req.params.user_id;
+  db('meal_plans')
+    .where({
+      user_id: user_id
+    })
+    .select('plan_id')
+    .then(data =>{
+      db('meals')
+        .select('day_of_wk')
+        .sum('calories as total_cals')
+        .sum('protein as total_p')
+        .sum('fat as total_f')
+        .sum('carbohydrate as total_c')
+        .leftJoin('foods', 'meals.recipe_id', 'foods.recipe_id')
+        .where({
+          plan_id: data[0].plan_id
+        })
+        .groupBy('day_of_wk')
+        .orderByRaw(
+          `CASE
+          WHEN day_of_wk = 'Monday' THEN 1
+          WHEN day_of_wk = 'Tuesday' THEN 2
+          WHEN day_of_wk = 'Wednesday' THEN 3
+          WHEN day_of_wk = 'Thursday' THEN 4
+          WHEN day_of_wk = 'Friday' THEN 5
+          WHEN day_of_wk = 'Saturday' THEN 6
+          WHEN day_of_wk = 'Sunday' THEN 7
+          END ASC`
+        )
+        .then(data => {
+          res.send(data)})
     })
     .catch(err => res.json(''))
 }
@@ -112,5 +168,6 @@ const deleteMeal = (db) => (req, res) => {
 module.exports = {
   addMeals,
   getMeals,
+  getMealsDetails,
   deleteMeal
 }

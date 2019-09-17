@@ -60,7 +60,7 @@ class Login extends React.Component {
 
   render(){
     return (
-      <div className='container'>
+      <div className='container'>        
         <main className="pa4 black-80">
           <form className="measure center">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -89,7 +89,7 @@ class Login extends React.Component {
                 />
               </div>
             </fieldset>
-            <div className="">
+            <div className="test">
               <input
                 onClick={this.onLoginSubmit}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 

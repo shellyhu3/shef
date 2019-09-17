@@ -1,0 +1,9 @@
+.calendar{
+  width: 100%;
+  border: thin solid black;
+  border-collapse: collapse;
+}
+
+.calendar th, .calendar td{
+  border: thin solid black;
+}
