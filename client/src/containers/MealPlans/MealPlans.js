@@ -2,56 +2,57 @@ import React from 'react';
 import Meal from './../../components/Meal/Meal';
 import './MealPlans.css';
 
+const initialState = {
+  user: '',
+  meal_plan: [],
+  Monday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Tuesday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Wednesday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Thursday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Friday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Saturday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  },
+  Sunday: {
+    cals: 0,
+    p: 0,
+    f: 0,
+    c: 0
+  }
+}
+
 class MealPlan extends React.Component {
   constructor() {
     super();
-    this.state = {
-      user: '',
-      meal_plan: [],
-      plan_det: []
-      // mon: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // tues: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // wed: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // thurs: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // fri: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // sat: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // },
-      // sun: {
-      //   cals: 0,
-      //   p: 0,
-      //   f: 0,
-      //   c: 0
-      // }
-    }
+    this.state = initialState;
   }
 
   
@@ -65,7 +66,6 @@ class MealPlan extends React.Component {
 
 
   getPlan = (user_id) => {
-    console.log('logged in')
     fetch(`http://localhost:8000/meals/${user_id}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
@@ -84,24 +84,39 @@ class MealPlan extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({plan_det: data})
+        data.forEach(element => {
+          this.setState(prevState => ({
+            [element.day_of_wk]: { 
+              ...prevState[element.day_of_wk],
+              cals: element.total_cals,
+              p: element.total_p,
+              f: element.total_f,
+              c: element.total_c
+            }
+          }))
+        });
       })
       .catch(err => console.log(err));
   }
 
   onDelete = (id) => {
     const user_id = localStorage.getItem('id');
-    console.log(user_id)
     fetch(`http://localhost:8000/meals/${id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
     })
-      .then(this.getPlan(user_id))
+      .then(response => response.json())
+      .then(data => {
+        console.log('deleted', data)
+        this.setState(initialState);
+        this.getPlanDetails(user_id);
+        this.getPlan(user_id);
+      })
       .catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.meal_plan, this.state.plan_det)
+    console.log(this.state)
     const meals = this.state.meal_plan;
     let m1, m2, m3, m4, m5, t1, t2, t3, t4, t5, w1, w2, w3, w4, w5, th1, th2, th3, th4, th5, f1, f2, f3, f4, f5, sa1, sa2, sa3, sa4, sa5, su1, su2, su3, su4, su5;
 
@@ -277,34 +292,43 @@ class MealPlan extends React.Component {
               </tr>
               <tr>
                 <th>Total Calories</th>
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[0].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[1].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[2].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[3].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[4].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[5].total_cals}</th>
-                  : <th></th>
-                }
-                {this.state.plan_det.length 
-                  ? <th>{this.state.plan_det[6].total_cals}</th>
-                  : <th></th>
-                }
+                <th>{this.state.Monday.cals}</th>
+                <th>{this.state.Tuesday.cals}</th>
+                <th>{this.state.Wednesday.cals}</th>
+                <th>{this.state.Thursday.cals}</th>
+                <th>{this.state.Friday.cals}</th>
+                <th>{this.state.Saturday.cals}</th>
+                <th>{this.state.Sunday.cals}</th>
+              </tr>
+              <tr>
+                <th>Total Protein</th>
+                <th>{this.state.Monday.p}</th>
+                <th>{this.state.Tuesday.p}</th>
+                <th>{this.state.Wednesday.p}</th>
+                <th>{this.state.Thursday.p}</th>
+                <th>{this.state.Friday.p}</th>
+                <th>{this.state.Saturday.p}</th>
+                <th>{this.state.Sunday.p}</th>
+              </tr>
+              <tr>
+                <th>Total Fat</th>
+                <th>{this.state.Monday.f}</th>
+                <th>{this.state.Tuesday.f}</th>
+                <th>{this.state.Wednesday.f}</th>
+                <th>{this.state.Thursday.f}</th>
+                <th>{this.state.Friday.f}</th>
+                <th>{this.state.Saturday.f}</th>
+                <th>{this.state.Sunday.f}</th>
+              </tr>
+              <tr>
+                <th>Total Carbs</th>
+                <th>{this.state.Monday.c}</th>
+                <th>{this.state.Tuesday.c}</th>
+                <th>{this.state.Wednesday.c}</th>
+                <th>{this.state.Thursday.c}</th>
+                <th>{this.state.Friday.c}</th>
+                <th>{this.state.Saturday.c}</th>
+                <th>{this.state.Sunday.c}</th>
               </tr>
             </tbody>
           </table>

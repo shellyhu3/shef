@@ -156,13 +156,13 @@ const getMealsDetails = (db) => (req, res) => {
 
 const deleteMeal = (db) => (req, res) => {
   const id = req.params.id;
-  console.log(id)
   db('meals')
     .where({
       id: id
     })
+    .returning(['day_of_wk', 'time_of_day'])
     .del()
-    .then(console.log)
+    .then(data => res.send(data))
 }
 
 module.exports = {
