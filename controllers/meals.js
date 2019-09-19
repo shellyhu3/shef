@@ -88,7 +88,7 @@ const getMeals = (db) => (req, res) => {
     .select('plan_id')
     .then(data =>{
       db('meals')
-        .select(['meals.id', 'day_of_wk', 'time_of_day', 'meals.created_at', 'meals.updated_at', 'name', 'calories', 'protein', 'fat', 'carbohydrate'])
+        .select(['meals.id', 'day_of_wk', 'time_of_day', 'meals.created_at', 'meals.updated_at', 'name', 'calories', 'protein', 'fat', 'carbohydrate', 'meals.recipe_id'])
         .leftJoin('foods', 'meals.recipe_id', 'foods.recipe_id')
         .where({
           plan_id: data[0].plan_id

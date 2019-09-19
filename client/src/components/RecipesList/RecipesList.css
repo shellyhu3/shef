@@ -25,6 +25,10 @@
   height: 350px;
 }
 
+.med_opacity{
+  opacity: 0.75;
+}
+
 .big_icon{
   width: 100px;
 }
@@ -34,6 +38,14 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   line-height: 2em;
+}
+
+.loading{
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
 }
 
 @media only screen and (max-width: 900px){

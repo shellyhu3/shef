@@ -1,6 +1,6 @@
 .card{
   height: 300px;
-  box-shadow: 5px 5px 5px rgba(97, 97, 134, 0.308);
+  box-shadow: 5px 5px 5px rgba(97, 97, 134, 0.3);
   padding: 5px;
   box-sizing: border-box;
   transition: transform 0.25s ease-out;

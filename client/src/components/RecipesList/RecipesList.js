@@ -5,38 +5,43 @@ import RecipeDetail from '../RecipeDetail/RecipeDetail';
 import search from './search.png';
 import add from './add.png';
 import cook from './cook.png';
-
 import './RecipesList.css';
 
-const RecipesList = ({recipes, pathMatch}) => {
-  console.log('list mounted')
-  if (recipes.length === 0){
+const RecipesList = ({recipes, pathMatch, loading}) => {
+  if (loading) {
+    return (
+      <div className='loading'>
+        <p>loading...</p>
+        <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
+      </div>
+    )
+  }
+
+  if (recipes.length === 0) {
     return (
       <div className='card_container_blank'>
-        <div>
+        <div className='med_opacity'>
           <p className='med_title bold'>Step 1</p>
           <img className='big_icon' src={search} alt='step 1: search recipes'/>
           <p className='med_title bold'>Search</p>
         </div>
 
-        <div>
+        <div className='med_opacity'>
           <p className='med_title bold'>Step 2</p>
           <img className='big_icon' src={add} alt='step 2: meal plan'/>
           <p className='med_title bold'>Plan</p>
         </div>
 
-        <div>
+        <div className='med_opacity'>
           <p className='med_title bold'>Step 3</p>
           <img className='big_icon' src={cook} alt='step 4: cook and enjoy'/>
           <p className='med_title bold'>Meal Prep</p>
         </div>
 
         <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-        {/* <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/> */}
-
       </div>
     )
-  } else if (!recipes.length){
+  } else if (!recipes.length) {
     recipes = [recipes];
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import RecipesList from '../../components/RecipesList/RecipesList';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 
 class RecipesMain extends React.Component {
@@ -10,6 +11,7 @@ class RecipesMain extends React.Component {
     this.state = {
       searchField: '',
       recipes:[],
+      loading: false
     }
   }
 
@@ -32,9 +34,11 @@ class RecipesMain extends React.Component {
   }
 
   onSearchSubmit = () => {
+    this.setState({loading: true})
     this.callBackendAPI(this.state.searchField)
       .then(resp => {
         this.setState({recipes: resp.recipes.recipe})
+        this.setState({loading: false})
       })
       .catch(err => console.log(err));
   }
@@ -42,10 +46,12 @@ class RecipesMain extends React.Component {
   render() {
     return(
       <div className='container'>
-       <p className='title'>Recipes</p>
-       <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
-       <RecipesList pathMatch={this.props.match} recipes={this.state.recipes}/>
-    </div>
+        <p className='title'>Recipes</p>
+        <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
+        <ErrorBoundary>
+          <RecipesList pathMatch={this.props.match} recipes={this.state.recipes} loading={this.state.loading}/>
+        </ErrorBoundary>
+      </div>
     )
   }
 }

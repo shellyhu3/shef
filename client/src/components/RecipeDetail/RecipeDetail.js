@@ -4,6 +4,7 @@ import serving_size from './serving_size.png';
 import timer from './timer.png';
 import calories from './calories.png';
 import macros from './macros.png';
+import meal_prep from '../RecipeCard/meal_prep.jpeg'
 
 class RecipeDetail extends React.Component {
   constructor(props){
@@ -107,7 +108,7 @@ class RecipeDetail extends React.Component {
   getImage = () => {
     const {recipe_images} = this.state.recipe;
     if (!recipe_images) {
-      return "https://www.medicalnewstoday.com/content//images/articles/324/324956/close-up-of-a-plate-of-food.jpg";
+      return meal_prep;
     } else if (Array.isArray(recipe_images.recipe_image)) {
       return recipe_images.recipe_image[0]
     } else {
@@ -200,7 +201,7 @@ class RecipeDetail extends React.Component {
                 <option value="Snack 2">Snack 2</option>
                 <option value="Dinner">Dinner</option>
               </select>
-              <button onClick={this.addRecipe}>Add</button>
+              <button className='button' onClick={this.addRecipe}>Add</button>
             </div>
             {this.state.errors ? <p className='error'>{this.state.errors.meal}</p> : ''}
             {this.state.success ? <p className='success'>{this.state.success}</p> : ''}

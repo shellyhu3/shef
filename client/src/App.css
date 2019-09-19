@@ -2,7 +2,6 @@
   padding: 90px 20px 0;
 }
 
-
 nav{
   height: 60px;
   width: 100%;
@@ -13,7 +12,7 @@ nav{
   position: fixed;
   background-color: white;
   z-index: 1;
-  box-shadow: 0 15px 15px rgba(40, 40, 56, 0.062);
+  box-shadow: 0 15px 15px rgba(97, 97, 134, 0.13);
 }
 
 nav ul{
@@ -41,8 +40,12 @@ nav ul{
   font-size: 0.9em;
   letter-spacing: 0.1em;
   text-align: center;
-  color: rgb(74, 79, 95);
+  color: rgba(97, 97, 134);
   cursor: pointer;
+}
+
+.nav_link:hover{
+  color: rgba(97, 97, 134, 0.7)
 }
 
 .name{
@@ -50,6 +53,7 @@ nav ul{
   text-transform: lowercase;
   letter-spacing: 0.4em;
   font-weight: 600;
+  color: rgb(66, 66, 92);
 }
 
 .title{
@@ -59,8 +63,12 @@ nav ul{
 }
 
 a{
-  color: rgb(79, 92, 99);
+  color: rgb(97, 97, 134);
   text-decoration: none;
+}
+
+a:hover{
+  color: rgba(97, 97, 134, 0.7);
 }
 
 .italic{
@@ -87,6 +95,11 @@ input{
   font-size: 16px;
 }
 
+.error_msg{
+  text-align: center;
+  padding-top: 15px;
+  width: 100vw;
+}
 
 @media only screen and (max-width: 700px){
   .container{

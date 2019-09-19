@@ -1,0 +1,15 @@
+.meal_list{
+  padding: 10px 0 50px;
+}
+
+.meal_list p{
+  font-size: 0.9em;
+}
+
+.meal_list .sm_title{
+  background: linear-gradient(to right, rgba(97, 97, 134, 0.185), white);
+  margin: 5px 0;
+  position: relative;
+  left: -20px;
+  padding-left: 20px;
+}

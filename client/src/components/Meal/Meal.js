@@ -1,22 +1,23 @@
 import React from 'react';
+import './Meal.css';
 
-const Meal = ({id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, onDelete}) => {
+const Meal = ({id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id, onDelete}) => {
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>{name}</th>
-            <th>{calories} Cals</th>
-            <th>P: {protein}g</th>
-            <th>F: {fat}g</th>
-            <th>C: {carbohydrate}g</th>
-            <th>{day_of_wk}</th>
-            <th>{time_of_day}</th>
-            <th><button onClick={()=>onDelete(id)}>Delete</button></th>
-          </tr>
-        </thead>
-      </table>
+    <div className='meal_item'>
+
+      <p className='meal_time'>{time_of_day}</p>
+      <p className='meal_name'><a href={`/recipes/${recipe_id}`}>{name}</a></p>
+      <p className='button_wrapper'><button className='button' onClick={()=>onDelete(id)}>Delete</button></p>
+      <p className='sm_scr'>Cals: {calories}</p>
+      <p className='sm_scr'>P: {protein}g</p>
+      <p className='sm_scr'>F: {fat}g</p>
+      <p className='sm_scr'>C: {carbohydrate}g</p>
+
+      <p className='big_scr'>Calories: {calories}</p>
+      <p className='big_scr'>Protein: {protein}g</p>
+      <p className='big_scr'>Fat: {fat}g</p>
+      <p className='big_scr'>Carbs: {carbohydrate}g</p>
+
 
     </div>
   )

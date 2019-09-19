@@ -18,6 +18,7 @@
   grid-template-columns: 1fr 1fr;
   padding: 0 50px;
   margin-bottom: 20px;
+  background: linear-gradient(to bottom, rgba(97, 97, 134, 0.15) 0%, white 50%);
 }
 
 .recipe_name{
@@ -36,8 +37,7 @@
 }
 
 .img_bg{
-  background: black;
-  
+  background: rgba(97, 97, 134, 0.15);
 }
 
 .icon{
@@ -105,26 +105,35 @@ hr{
 
 .add_recipe{
   padding-bottom: 15px;
+  font-size: 0.7em;
+}
+
+.add_recipe select{
+  padding: 3px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  cursor: pointer;
 }
 
 .add_recipe select:hover, .add_recipe select:focus{
-  background-color: rgba(40, 40, 56, 0.062);
+  background-color: rgba(97, 97, 134, 0.15);
 }
 
-.add_recipe button{
+.button{
   background: white;
-  border: thin solid black;
+  border: thin solid rgba(97, 97, 134, 0.5);
   margin-left: 8px;
-  padding: 2px 5px;
+  padding: 5px;
   vertical-align: top;
+  cursor: pointer;
 }
 
-.add_recipe button:focus{
+.button:focus{
   outline: none;
 }
 
-.add_recipe button:hover{
-  background-color: rgba(40, 40, 56, 0.062);
+.button:hover{
+  background-color: rgba(97, 97, 134, 0.15);
 }
 
 @media only screen and (max-width: 900px){

@@ -24,7 +24,7 @@
 }
 
 .input:focus{
-  background-color: rgba(40, 40, 56, 0.062);
+  background-color: rgba(97, 97, 134, 0.15);
 }
 
 .search_btn{
@@ -45,6 +45,6 @@
 }
 
 .search_btn:hover{
-  background-color: rgba(40, 40, 56, 0.062);
+  background-color: rgba(97, 97, 134, 0.15);
 }
 
