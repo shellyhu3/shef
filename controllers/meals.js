@@ -1,6 +1,6 @@
 const addMeals = (db) => (req, res) => {
   const errors = {};
-  const {user_id, recipe_id, name, cals, protein, carbs, fat, day_of_wk, time_of_day} = req.body;
+  const {user_id, recipe_id, name, cals, protein, carbs, fat, day_of_wk, time_of_day, ingredients} = req.body;
   db('foods')
     .where({
       recipe_id: recipe_id
@@ -17,6 +17,7 @@ const addMeals = (db) => (req, res) => {
             protein: protein,
             carbohydrate: carbs,
             fat: fat,
+            ingredients: ingredients
           })
           .then(recipe_id => {
             console.log("recipe_id added ", recipe_id);
@@ -154,6 +155,22 @@ const getMealsDetails = (db) => (req, res) => {
     .catch(err => res.json(''))
 }
 
+const getIngredients = (db) => (req, res) => {
+  const user_id = req.params.user_id;
+  db('meal_plans')
+    .where({
+      user_id: user_id
+    })
+    .select('plan_id')
+    .then(data =>{
+      db('meals')
+        .select('ingredients')
+        .leftJoin('foods', 'meals.recipe_id', 'foods.recipe_id')
+        .then(data => res.send(data))
+    })
+    .catch(err => res.json(''))
+}
+
 const deleteMeal = (db) => (req, res) => {
   const id = req.params.id;
   db('meals')
@@ -169,5 +186,6 @@ module.exports = {
   addMeals,
   getMeals,
   getMealsDetails,
+  getIngredients,
   deleteMeal
 }

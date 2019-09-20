@@ -5,7 +5,7 @@ import './AllMeals.css'
 const AllMeals = ({meals, onDelete}) => {
   return(
     <div className='meal_list'>
-      <p className='sm_title'>Monday</p>
+      <p className='gradient_title'>Monday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Monday') {
@@ -27,7 +27,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Tuesday</p>
+      <p className='gradient_title'>Tuesday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Tuesday') {
@@ -49,7 +49,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Wednesday</p>
+      <p className='gradient_title'>Wednesday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Wednesday') {
@@ -71,7 +71,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Thursday</p>
+      <p className='gradient_title'>Thursday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Thursday') {
@@ -93,7 +93,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Friday</p>
+      <p className='gradient_title'>Friday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Friday') {
@@ -115,7 +115,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Saturday</p>
+      <p className='gradient_title'>Saturday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Saturday') {
@@ -137,7 +137,7 @@ const AllMeals = ({meals, onDelete}) => {
         }
       })}
 
-      <p className='sm_title'>Sunday</p>
+      <p className='gradient_title'>Sunday</p>
       {meals.map(meal => {
         const {id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id} = meal;
         if (day_of_wk==='Sunday') {

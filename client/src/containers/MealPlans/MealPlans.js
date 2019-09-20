@@ -1,12 +1,14 @@
 import React from 'react';
 import AllMeals from './../../components/AllMeals/AllMeals';
+import ShoppingList from './../../components/ShoppingList/ShoppingList';
+
 
 import './MealPlans.css';
 
 const initialState = {
   user: '',
   meal_plan: [],
-  loading: true,
+  all_ingredients: [],
   Monday: {
     cals: 0,
     p: 0,
@@ -51,52 +53,6 @@ const initialState = {
   }
 }
 
-const resetState = {
-  user: '',
-  meal_plan: [],
-  Monday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Tuesday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Wednesday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Thursday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Friday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Saturday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  },
-  Sunday: {
-    cals: 0,
-    p: 0,
-    f: 0,
-    c: 0
-  }
-}
 
 class MealPlan extends React.Component {
   constructor() {
@@ -111,6 +67,7 @@ class MealPlan extends React.Component {
     const id = localStorage.getItem('id');
     this.getPlan(id);
     this.getPlanDetails(id);
+    this.getIngreds(id);
     this.setState({loading: false})
   }
 
@@ -128,7 +85,7 @@ class MealPlan extends React.Component {
   }
 
   getPlanDetails = (user_id) => {
-    fetch(`http://localhost:8000/meals_details/${user_id}`, {
+    fetch(`http://localhost:8000/meals_foods/${user_id}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -149,6 +106,27 @@ class MealPlan extends React.Component {
       .catch(err => console.log(err));
   }
 
+  getIngreds = (user_id) => {
+    fetch(`http://localhost:8000/foods/${user_id}`, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    })
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(food => {
+          food.ingredients.forEach(ingred => {
+            this.setState(prevState => ({
+              all_ingredients: [
+                ...prevState.all_ingredients,
+                ingred
+              ]
+            }))
+          })
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
   onDelete = (id) => {
     const user_id = localStorage.getItem('id');
     fetch(`http://localhost:8000/meals/${id}`, {
@@ -158,20 +136,22 @@ class MealPlan extends React.Component {
       .then(response => response.json())
       .then(data => {
         console.log('deleted', data)
-        this.setState(resetState);
-        this.getPlanDetails(user_id);
+        this.setState(initialState);
         this.getPlan(user_id);
+        this.getPlanDetails(user_id);
+        this.getIngreds(user_id);
       })
       .catch(err => console.log(err));
   }
 
   render() {
     const meals = this.state.meal_plan;
-    console.log(meals)
     let m1, m2, m3, m4, m5, t1, t2, t3, t4, t5, w1, w2, w3, w4, w5, th1, th2, th3, th4, th5, f1, f2, f3, f4, f5, sa1, sa2, sa3, sa4, sa5, su1, su2, su3, su4, su5;
 
     return (
       <div className='container'>
+        <p className='title gradient_title'>{this.state.user}'s meal plan</p>
+        <br></br>
         {meals.forEach(meal => {
           const {day_of_wk, time_of_day, name} = meal;
           if (day_of_wk==='Monday') {
@@ -378,6 +358,7 @@ class MealPlan extends React.Component {
         </table>
 
         <AllMeals meals={meals} onDelete={this.onDelete}/>
+        <ShoppingList ingredients={this.state.all_ingredients}/>
       </div>
     )
   }

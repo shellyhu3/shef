@@ -129,6 +129,9 @@ class RecipeDetail extends React.Component {
     this.setState({success: ''});
     const {recipe_id, recipe_name, serving_sizes} = this.state.recipe;
     const {calories, protein, carbohydrate, fat} = serving_sizes.serving;
+    const ingredients = this.state.recipe.ingredients.ingredient.map(ingred=> {
+      return(ingred.food_name);
+    });
     if (localStorage.getItem('jwt_token')) {
       fetch('http://localhost:8000/meals', {
         method: 'POST',
@@ -141,6 +144,7 @@ class RecipeDetail extends React.Component {
           protein: protein,
           carbs: carbohydrate,
           fat: fat,
+          ingredients: ingredients,
           day_of_wk: this.state.day_of_wk,
           time_of_day: this.state.time_of_day
         })

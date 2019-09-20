@@ -86,7 +86,7 @@ class App extends React.Component {
             }
           </ul>
         </nav>
-        <Route path = '/' exact render={() => <Home user={this.state.user} />} />
+        <Route path = '/' exact component={Home} />
         <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn} />} />
         <PrivateRoute path = '/plans' component={MealPlans} />
         <Route path = '/login' render={() => <Login loadUser = {this.loadUser} />}/>

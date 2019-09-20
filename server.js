@@ -46,7 +46,9 @@ app.post('/meals', meals.addMeals(db))
 
 app.get('/meals/:user_id', meals.getMeals(db))
 
-app.get('/meals_details/:user_id', meals.getMealsDetails(db))
+app.get('/meals_foods/:user_id', meals.getMealsDetails(db))
+
+app.get('/foods/:user_id', meals.getIngredients(db))
 
 app.delete('/meals/:id', meals.deleteMeal(db))
 

@@ -16,30 +16,6 @@
   scroll-snap-type: x proximity;
 }
 
-.card_container_blank{
-  box-sizing: border-box;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) ;
-  align-items: center;
-  height: 350px;
-}
-
-.med_opacity{
-  opacity: 0.75;
-}
-
-.big_icon{
-  width: 100px;
-}
-
-.med_title{
-  font-size: 1.1em;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  line-height: 2em;
-}
-
 .loading{
   text-align: center;
   margin-top: 30px;
