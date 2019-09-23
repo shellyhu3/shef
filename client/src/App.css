@@ -113,8 +113,11 @@ input{
   font-family: Merriweather, sans-serif;
 }
 
+
 button{
   font-family: Merriweather, sans-serif;
+  text-transform: lowercase;
+  border: thin solid black;
 }
 
 .error_msg{

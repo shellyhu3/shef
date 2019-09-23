@@ -22,7 +22,6 @@ form input:focus{
   margin: 15px 0 20px;
   line-height: 2em;
   background: transparent;
-  border: thin solid black;
   cursor: pointer;
   padding: 0 15px;
   font-size: 16px;
