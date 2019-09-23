@@ -29,6 +29,7 @@ class RecipesMain extends React.Component {
 
   onInputChange = (event) => {
     this.setState({searchField: event.target.value});
+    this.setState({resetScroll: false});
   }
 
   onSearchSubmit = () => {
@@ -38,6 +39,7 @@ class RecipesMain extends React.Component {
       .then(resp => {
         this.setState({recipes: resp.recipes.recipe})
         this.setState({loading: false})
+        this.setState({resetScroll: true})
       })
       .catch(err => console.log(err));
   }
