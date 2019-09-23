@@ -122,6 +122,7 @@ class RecipeDetail extends React.Component {
   }
 
   addRecipe = () => {
+    console.log('clicked')
     this.setState({errors: {}});
     this.setState({success: ''});
     const {recipe_id, recipe_name, serving_sizes} = this.state.recipe;
