@@ -6,10 +6,8 @@ const saltRounds= 10;
 const db = require('knex')({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'shell',
-    password: 'root',
-    database: 'shef'
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
   }
 });
 const jwt = require('jsonwebtoken');
