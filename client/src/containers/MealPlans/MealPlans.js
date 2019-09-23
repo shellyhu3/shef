@@ -150,7 +150,7 @@ class MealPlan extends React.Component {
 
   render() {
     const meals = this.state.meal_plan;
-    let m1, m2, m3, m4, m5, t1, t2, t3, t4, t5, w1, w2, w3, w4, w5, th1, th2, th3, th4, th5, f1, f2, f3, f4, f5, sa1, sa2, sa3, sa4, sa5, su1, su2, su3, su4, su5;
+    let m1=[], m2=[], m3=[], m4=[], m5=[], t1=[], t2=[], t3=[], t4=[], t5=[], w1=[], w2=[], w3=[], w4=[], w5=[], th1=[], th2=[], th3=[], th4=[], th5=[], f1=[], f2=[], f3=[], f4=[], f5=[], sa1=[], sa2=[], sa3=[], sa4=[], sa5=[], su1=[], su2=[], su3=[], su4=[], su5=[];
 
     return (
       <div className='container'>
@@ -162,93 +162,94 @@ class MealPlan extends React.Component {
             const {day_of_wk, time_of_day, name} = meal;
             if (day_of_wk==='Monday') {
               if (time_of_day==='Breakfast') {
-                m1 = name;
+                m1.push(name);
               } else if (time_of_day==='Snack 1') {
-                m2 = name;
+                m2.push(name);
               } else if (time_of_day==='Lunch') {
-                m3 = name;
+                m3.push(name);
               } else if (time_of_day==='Snack 2') {
-                m4 = name;
+                m4.push(name);
               } else if (time_of_day==='Dinner') {
-                m5 = name;
+                m5.push(name);
               }
             } else if (day_of_wk==='Tuesday') {
               if (time_of_day==='Breakfast') {
-                t1 = name;
+                t1.push(name);
               } else if (time_of_day==='Snack 1') {
-                t2 = name;
+                t2.push(name);
               } else if (time_of_day==='Lunch') {
-                t3 = name;
+                t3.push(name);
               } else if (time_of_day==='Snack 2') {
-                t4 = name;
+                t4.push(name);
               } else if (time_of_day==='Dinner') {
-                t5 = name;
+                t5.push(name);
               }
             } else if (day_of_wk==='Wednesday') {
               if (time_of_day==='Breakfast') {
-                w1 = name;
+                w1.push(name);
               } else if (time_of_day==='Snack 1') {
-                w2 = name;
+                w2.push(name);
               } else if (time_of_day==='Lunch') {
-                w3 = name;
+                w3.push(name);
               } else if (time_of_day==='Snack 2') {
-                w4 = name;
+                w4.push(name);
               } else if (time_of_day==='Dinner') {
-                w5 = name;
+                w5.push(name);
               }
             } else if (day_of_wk==='Thursday') {
               if (time_of_day==='Breakfast') {
-                th1 = name;
+                th1.push(name);
               } else if (time_of_day==='Snack 1') {
-                th2 = name;
+                th2.push(name);
               } else if (time_of_day==='Lunch') {
-                th3 = name;
+                th3.push(name);
               } else if (time_of_day==='Snack 2') {
-                th4 = name;
+                th4.push(name);
               } else if (time_of_day==='Dinner') {
-                th5 = name;
+                th5.push(name);
               }
             } else if (day_of_wk==='Friday') {
               if (time_of_day==='Breakfast') {
-                f1 = name;
+                f1.push(name);
               } else if (time_of_day==='Snack 1') {
-                f2 = name;
+                f2.push(name);
               } else if (time_of_day==='Lunch') {
-                f3 = name;
+                f3.push(name);
               } else if (time_of_day==='Snack 2') {
-                f4 = name;
+                f4.push(name);
               } else if (time_of_day==='Dinner') {
-                f5 = name;
+                f5.push(name);
               }
             } else if (day_of_wk==='Saturday') {
               if (time_of_day==='Breakfast') {
-                sa1 = name;
+                sa1.push(name);
               } else if (time_of_day==='Snack 1') {
-                sa2 = name;
+                sa2.push(name);
               } else if (time_of_day==='Lunch') {
-                sa3 = name;
+                sa3.push(name);
               } else if (time_of_day==='Snack 2') {
-                sa4 = name;
+                sa4.push(name);
               } else if (time_of_day==='Dinner') {
-                sa5 = name;
+                sa5.push(name);
               }
             } else if (day_of_wk==='Sunday') {
               if (time_of_day==='Breakfast') {
-                su1 = name;
+                su1.push(name);
               } else if (time_of_day==='Snack 1') {
-                su2 = name;
+                su2.push(name);
               } else if (time_of_day==='Lunch') {
-                su3 = name;
+                su3.push(name);
               } else if (time_of_day==='Snack 2') {
-                su4 = name;
+                su4.push(name);
               } else if (time_of_day==='Dinner') {
-                su5 = name;
+                su5.push(name);
               }
             }
           })
           : ''
         }
 
+        {console.log(m5)}
         <table className='calendar'>
           <thead>
             <tr className='calendar_main'>
@@ -266,57 +267,57 @@ class MealPlan extends React.Component {
             <tr className='calendar_main'>
               <th className='big_screen'>Breakfast</th>
               <th className='sm_screen'>B</th>
-              <td>{m1}</td>
-              <td>{t1}</td>
-              <td>{w1}</td>
-              <td>{th1}</td>
-              <td>{f1}</td>
-              <td>{sa1}</td>
-              <td>{su1}</td>
+              <td>{m1.join()}</td>
+              <td>{t1.join()}</td>
+              <td>{w1.join()}</td>
+              <td>{th1.join()}</td>
+              <td>{f1.join()}</td>
+              <td>{sa1.join()}</td>
+              <td>{su1.join()}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Snack 1</th>
               <th className='sm_screen'>S1</th>                
-              <td>{m2}</td>
-              <td>{t2}</td>
-              <td>{w2}</td>
-              <td>{th2}</td>
-              <td>{f2}</td>
-              <td>{sa2}</td>
-              <td>{su2}</td>
+              <td>{m2.join()}</td>
+              <td>{t2.join()}</td>
+              <td>{w2.join()}</td>
+              <td>{th2.join()}</td>
+              <td>{f2.join()}</td>
+              <td>{sa2.join()}</td>
+              <td>{su2.join()}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Lunch</th>
               <th className='sm_screen'>L</th>                
-              <td>{m3}</td>
-              <td>{t3}</td>
-              <td>{w3}</td>
-              <td>{th3}</td>
-              <td>{f3}</td>
-              <td>{sa3}</td>
-              <td>{su3}</td>
+              <td>{m3.join()}</td>
+              <td>{t3.join()}</td>
+              <td>{w3.join()}</td>
+              <td>{th3.join()}</td>
+              <td>{f3.join()}</td>
+              <td>{sa3.join()}</td>
+              <td>{su3.join()}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Snack 2</th>
               <th className='sm_screen'>S2</th>                
-              <td>{m4}</td>
-              <td>{t4}</td>
-              <td>{w4}</td>
-              <td>{th4}</td>
-              <td>{f4}</td>
-              <td>{sa4}</td>
-              <td>{su4}</td>
+              <td>{m4.join()}</td>
+              <td>{t4.join()}</td>
+              <td>{w4.join()}</td>
+              <td>{th4.join()}</td>
+              <td>{f4.join()}</td>
+              <td>{sa4.join()}</td>
+              <td>{su4.join()}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Dinner</th>
               <th className='sm_screen'>D</th>                
-              <td>{m5}</td>
-              <td>{t5}</td>
-              <td>{w5}</td>
-              <td>{th5}</td>
-              <td>{f5}</td>
-              <td>{sa5}</td>
-              <td>{su5}</td>
+              <td>{m5.join()}</td>
+              <td>{t5.join()}</td>
+              <td>{w5.join()}</td>
+              <td>{th5.join()}</td>
+              <td>{f5.join()}</td>
+              <td>{sa5.join()}</td>
+              <td>{su5.join()}</td>
             </tr>
             <tr className='macros'>
               <th className='big_screen'>Calories</th>
