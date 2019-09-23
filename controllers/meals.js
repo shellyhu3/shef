@@ -21,59 +21,111 @@ const addMeals = (db) => (req, res) => {
           })
           .then(recipe_id => {
             console.log("recipe_id added ", recipe_id);
-          })
-      }
-
-      db('meal_plans')
-      .where({
-        user_id: user_id
-      })
-      .select('plan_id')
-      .then(data => {
-        if (data.length) {
-          db('meals')
-            .returning('*')
-            .insert({
-              plan_id: data[0].plan_id,
-              recipe_id: recipe_id,
-              day_of_wk: day_of_wk,
-              time_of_day: time_of_day
-            })
-            .then(meal => {
-              res.json(meal[0]);
-            })
-            .catch(err => {
-              errors.meal = 'meal exists already (choose a different time)';
-              res.json(errors)
-            })
-        } else {
-          db.transaction(trx => {
-            trx('meal_plans')
-              .returning('plan_id')
-              .insert({
+            
+            db('meal_plans')
+              .where({
                 user_id: user_id
               })
-              .then(plan_id => {
-                return trx('meals')
-                  .returning('*')
-                  .insert({
-                    plan_id: plan_id[0],
-                    recipe_id: recipe_id,
-                    day_of_wk: day_of_wk,
-                    time_of_day: time_of_day
+              .select('plan_id')
+              .then(data => {
+                if (data.length) {
+                  db('meals')
+                    .returning('*')
+                    .insert({
+                      plan_id: data[0].plan_id,
+                      recipe_id: recipe_id,
+                      day_of_wk: day_of_wk,
+                      time_of_day: time_of_day
+                    })
+                    .then(meal => {
+                      res.json(meal[0]);
+                    })
+                    .catch(err => {
+                      errors.meal = 'meal exists already (choose a different time)';
+                      res.json(errors)
+                    })
+                } else {
+                  db.transaction(trx => {
+                    trx('meal_plans')
+                      .returning('plan_id')
+                      .insert({
+                        user_id: user_id
+                      })
+                      .then(plan_id => {
+                        return trx('meals')
+                          .returning('*')
+                          .insert({
+                            plan_id: plan_id[0],
+                            recipe_id: recipe_id,
+                            day_of_wk: day_of_wk,
+                            time_of_day: time_of_day
+                          })
+                          .then(meal => {
+                            res.json(meal[0])
+                          })
+                          .catch(err => console.log(err))
+                      })
+                      .then(trx.commit)
+                      .catch(trx.rollback)
                   })
-                  .then(meal => {
-                    res.json(meal[0])
-                  })
-                  .catch(err => console.log(err))
+                  .catch(err => res.json('transaction error'))
+                }
               })
-              .then(trx.commit)
-              .catch(trx.rollback)
           })
-          .catch(err => res.json('transaction error'))
-        }
-      })
+      } else {
+        db('meal_plans')
+          .where({
+            user_id: user_id
+          })
+          .select('plan_id')
+          .then(data => {
+            if (data.length) {
+              db('meals')
+                .returning('*')
+                .insert({
+                  plan_id: data[0].plan_id,
+                  recipe_id: recipe_id,
+                  day_of_wk: day_of_wk,
+                  time_of_day: time_of_day
+                })
+                .then(meal => {
+                  res.json(meal[0]);
+                })
+                .catch(err => {
+                  errors.meal = 'meal exists already (choose a different time)';
+                  res.json(errors)
+                })
+            } else {
+              db.transaction(trx => {
+                trx('meal_plans')
+                  .returning('plan_id')
+                  .insert({
+                    user_id: user_id
+                  })
+                  .then(plan_id => {
+                    return trx('meals')
+                      .returning('*')
+                      .insert({
+                        plan_id: plan_id[0],
+                        recipe_id: recipe_id,
+                        day_of_wk: day_of_wk,
+                        time_of_day: time_of_day
+                      })
+                      .then(meal => {
+                        res.json(meal[0])
+                      })
+                      .catch(err => console.log(err))
+                  })
+                  .then(trx.commit)
+                  .catch(trx.rollback)
+              })
+              .catch(err => res.json('transaction error'))
+            }
+          })
+      }
     })
+      
+
 
 
   // db('meal_plans')
