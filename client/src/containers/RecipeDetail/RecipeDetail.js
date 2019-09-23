@@ -58,7 +58,7 @@ class RecipeDetail extends React.Component {
   }
 
   callBackendAPI = async (recipe_id) => {
-    const response = await fetch(`/recipe/${recipe_id}`);
+    const response = await fetch(`/api/recipe/${recipe_id}`);
     const body = await response.json();
 
     if (response.status !== 200) {
