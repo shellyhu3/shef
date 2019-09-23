@@ -130,7 +130,7 @@ class RecipeDetail extends React.Component {
       return(ingred.food_name);
     });
     if (localStorage.getItem('jwt_token')) {
-      fetch('http://localhost:8000/meals', {
+      fetch('/api/meals', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
