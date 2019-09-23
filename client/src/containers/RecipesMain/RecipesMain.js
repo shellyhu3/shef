@@ -18,7 +18,7 @@ class RecipesMain extends React.Component {
   }
 
   callBackendAPI = async (search, pg) => {
-    const response = await fetch(`/recipes/${search}/${pg}`);
+    const response = await fetch(`/api/recipes/${search}/${pg}`);
     const body = await response.json();
 
     if (response.status !== 200) {
