@@ -28,10 +28,7 @@ const api = require('./api');
 const path = require('path');
 // // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')))
-// // Anything that doesn't match the above, send back index.html
-// app.get('*', (req, res) => {
-//   app.use(express.static(path.join(__dirname + '/client/build')))
-// })
+
 
 
 app.get('/api/recipes/:ingred1?/:pg', (req,res) => {
@@ -60,5 +57,10 @@ app.get('/api/meals_foods/:user_id', meals.getMealsDetails(db))
 app.get('/api/foods/:user_id', meals.getIngredients(db))
 
 app.delete('/api/meals/:id', meals.deleteMeal(db))
+
+// // Anything that doesn't match the above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 app.listen(process.env.PORT || 8000, () => console.log(`listening on ${process.env.PORT}`));
