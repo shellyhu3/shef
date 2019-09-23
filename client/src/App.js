@@ -36,9 +36,6 @@ class App extends React.Component {
     const jwt = this.getJwt();
     if(jwt) {
       this.setState({isLoggedIn: true})
-      console.log('is logged in') 
-    } else {
-    console.log('not logged in')
     }
   }
 

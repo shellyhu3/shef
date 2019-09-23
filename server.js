@@ -25,8 +25,8 @@ const meals = require('./controllers/meals');
 
 const api = require('./api');
 
-app.get('/recipes/:ingred1?', (req,res) => {
-  api.searchRecipe(req.params.ingred1)
+app.get('/recipes/:ingred1?/:pg', (req,res) => {
+  api.searchRecipe(req.params.ingred1, 20, req.params.pg)
     .then(data=>res.json(data))
     .catch(err=>res.json(err));
 })

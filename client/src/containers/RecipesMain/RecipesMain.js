@@ -11,16 +11,14 @@ class RecipesMain extends React.Component {
     this.state = {
       searchField: '',
       recipes:[],
-      loading: false
+      page: 0,
+      loading: false,
+      resetScroll: false
     }
   }
 
-  componentDidMount() {
-    console.log('Recipes Main mounted')
-  }
-
-  callBackendAPI = async (search) => {
-    const response = await fetch(`/recipes/${search}`);
+  callBackendAPI = async (search, pg) => {
+    const response = await fetch(`/recipes/${search}/${pg}`);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -35,10 +33,23 @@ class RecipesMain extends React.Component {
 
   onSearchSubmit = () => {
     this.setState({loading: true})
-    this.callBackendAPI(this.state.searchField)
+    this.setState({page: 0})
+    this.callBackendAPI(this.state.searchField, 0)
       .then(resp => {
         this.setState({recipes: resp.recipes.recipe})
         this.setState({loading: false})
+      })
+      .catch(err => console.log(err));
+  }
+
+  nextPage = () => {
+    this.setState({loading: true});
+    this.setState({page: this.state.page+1})
+    this.callBackendAPI(this.state.searchField, this.state.page+1)
+      .then(resp => {
+        this.setState({recipes: resp.recipes.recipe})
+        this.setState({loading: false})
+        this.setState({resetScroll: true})
       })
       .catch(err => console.log(err));
   }
@@ -47,9 +58,19 @@ class RecipesMain extends React.Component {
     return(
       <div className='container'>
         <p className='title gradient_title'>Recipes</p>
-        <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
+        <SearchBar 
+          searchField={this.state.searchField} 
+          onInputChange={this.onInputChange} 
+          onSearchSubmit={this.onSearchSubmit}
+        />
         <ErrorBoundary>
-          <RecipesList pathMatch={this.props.match} recipes={this.state.recipes} loading={this.state.loading}/>
+          <RecipesList 
+            pathMatch={this.props.match} 
+            recipes={this.state.recipes} 
+            loading={this.state.loading} 
+            nextPg={this.nextPage}
+            resetScroll={this.state.resetScroll}
+          />
         </ErrorBoundary>
       </div>
     )
