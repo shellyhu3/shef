@@ -166,7 +166,12 @@ const getIngredients = (db) => (req, res) => {
       db('meals')
         .select('ingredients')
         .leftJoin('foods', 'meals.recipe_id', 'foods.recipe_id')
-        .then(data => res.send(data))
+        .where({
+          plan_id: data[0].plan_id
+        })
+        .then(data => {
+          res.send(data)
+        })
     })
     .catch(err => res.json(''))
 }

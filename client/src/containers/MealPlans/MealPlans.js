@@ -91,17 +91,19 @@ class MealPlan extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        data.forEach(element => {
-          this.setState(prevState => ({
-            [element.day_of_wk]: { 
-              ...prevState[element.day_of_wk],
-              cals: element.total_cals,
-              p: element.total_p,
-              f: element.total_f,
-              c: element.total_c
-            }
-          }))
-        });
+        if (data) {
+          data.forEach(element => {
+            this.setState(prevState => ({
+              [element.day_of_wk]: { 
+                ...prevState[element.day_of_wk],
+                cals: element.total_cals,
+                p: element.total_p,
+                f: element.total_f,
+                c: element.total_c
+              }
+            }))
+          })
+        }
       })
       .catch(err => console.log(err));
   }
@@ -113,16 +115,18 @@ class MealPlan extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        data.forEach(food => {
-          food.ingredients.forEach(ingred => {
-            this.setState(prevState => ({
-              all_ingredients: [
-                ...prevState.all_ingredients,
-                ingred
-              ]
-            }))
+        if(data) {
+          data.forEach(food => {
+            food.ingredients.forEach(ingred => {
+              this.setState(prevState => ({
+                all_ingredients: [
+                  ...prevState.all_ingredients,
+                  ingred
+                ]
+              }))
+            })
           })
-        })
+        }
       })
       .catch(err => console.log(err));
   }
@@ -152,94 +156,98 @@ class MealPlan extends React.Component {
       <div className='container'>
         <p className='title gradient_title'>{this.state.user}'s meal plan</p>
         <br></br>
-        {meals.forEach(meal => {
-          const {day_of_wk, time_of_day, name} = meal;
-          if (day_of_wk==='Monday') {
-            if (time_of_day==='Breakfast') {
-              m1 = name;
-            } else if (time_of_day==='Snack 1') {
-              m2 = name;
-            } else if (time_of_day==='Lunch') {
-              m3 = name;
-            } else if (time_of_day==='Snack 2') {
-              m4 = name;
-            } else if (time_of_day==='Dinner') {
-              m5 = name;
+
+        {meals.length ?
+          meals.forEach(meal => {
+            const {day_of_wk, time_of_day, name} = meal;
+            if (day_of_wk==='Monday') {
+              if (time_of_day==='Breakfast') {
+                m1 = name;
+              } else if (time_of_day==='Snack 1') {
+                m2 = name;
+              } else if (time_of_day==='Lunch') {
+                m3 = name;
+              } else if (time_of_day==='Snack 2') {
+                m4 = name;
+              } else if (time_of_day==='Dinner') {
+                m5 = name;
+              }
+            } else if (day_of_wk==='Tuesday') {
+              if (time_of_day==='Breakfast') {
+                t1 = name;
+              } else if (time_of_day==='Snack 1') {
+                t2 = name;
+              } else if (time_of_day==='Lunch') {
+                t3 = name;
+              } else if (time_of_day==='Snack 2') {
+                t4 = name;
+              } else if (time_of_day==='Dinner') {
+                t5 = name;
+              }
+            } else if (day_of_wk==='Wednesday') {
+              if (time_of_day==='Breakfast') {
+                w1 = name;
+              } else if (time_of_day==='Snack 1') {
+                w2 = name;
+              } else if (time_of_day==='Lunch') {
+                w3 = name;
+              } else if (time_of_day==='Snack 2') {
+                w4 = name;
+              } else if (time_of_day==='Dinner') {
+                w5 = name;
+              }
+            } else if (day_of_wk==='Thursday') {
+              if (time_of_day==='Breakfast') {
+                th1 = name;
+              } else if (time_of_day==='Snack 1') {
+                th2 = name;
+              } else if (time_of_day==='Lunch') {
+                th3 = name;
+              } else if (time_of_day==='Snack 2') {
+                th4 = name;
+              } else if (time_of_day==='Dinner') {
+                th5 = name;
+              }
+            } else if (day_of_wk==='Friday') {
+              if (time_of_day==='Breakfast') {
+                f1 = name;
+              } else if (time_of_day==='Snack 1') {
+                f2 = name;
+              } else if (time_of_day==='Lunch') {
+                f3 = name;
+              } else if (time_of_day==='Snack 2') {
+                f4 = name;
+              } else if (time_of_day==='Dinner') {
+                f5 = name;
+              }
+            } else if (day_of_wk==='Saturday') {
+              if (time_of_day==='Breakfast') {
+                sa1 = name;
+              } else if (time_of_day==='Snack 1') {
+                sa2 = name;
+              } else if (time_of_day==='Lunch') {
+                sa3 = name;
+              } else if (time_of_day==='Snack 2') {
+                sa4 = name;
+              } else if (time_of_day==='Dinner') {
+                sa5 = name;
+              }
+            } else if (day_of_wk==='Sunday') {
+              if (time_of_day==='Breakfast') {
+                su1 = name;
+              } else if (time_of_day==='Snack 1') {
+                su2 = name;
+              } else if (time_of_day==='Lunch') {
+                su3 = name;
+              } else if (time_of_day==='Snack 2') {
+                su4 = name;
+              } else if (time_of_day==='Dinner') {
+                su5 = name;
+              }
             }
-          } else if (day_of_wk==='Tuesday') {
-            if (time_of_day==='Breakfast') {
-              t1 = name;
-            } else if (time_of_day==='Snack 1') {
-              t2 = name;
-            } else if (time_of_day==='Lunch') {
-              t3 = name;
-            } else if (time_of_day==='Snack 2') {
-              t4 = name;
-            } else if (time_of_day==='Dinner') {
-              t5 = name;
-            }
-          } else if (day_of_wk==='Wednesday') {
-            if (time_of_day==='Breakfast') {
-              w1 = name;
-            } else if (time_of_day==='Snack 1') {
-              w2 = name;
-            } else if (time_of_day==='Lunch') {
-              w3 = name;
-            } else if (time_of_day==='Snack 2') {
-              w4 = name;
-            } else if (time_of_day==='Dinner') {
-              w5 = name;
-            }
-          } else if (day_of_wk==='Thursday') {
-            if (time_of_day==='Breakfast') {
-              th1 = name;
-            } else if (time_of_day==='Snack 1') {
-              th2 = name;
-            } else if (time_of_day==='Lunch') {
-              th3 = name;
-            } else if (time_of_day==='Snack 2') {
-              th4 = name;
-            } else if (time_of_day==='Dinner') {
-              th5 = name;
-            }
-          } else if (day_of_wk==='Friday') {
-            if (time_of_day==='Breakfast') {
-              f1 = name;
-            } else if (time_of_day==='Snack 1') {
-              f2 = name;
-            } else if (time_of_day==='Lunch') {
-              f3 = name;
-            } else if (time_of_day==='Snack 2') {
-              f4 = name;
-            } else if (time_of_day==='Dinner') {
-              f5 = name;
-            }
-          } else if (day_of_wk==='Saturday') {
-            if (time_of_day==='Breakfast') {
-              sa1 = name;
-            } else if (time_of_day==='Snack 1') {
-              sa2 = name;
-            } else if (time_of_day==='Lunch') {
-              sa3 = name;
-            } else if (time_of_day==='Snack 2') {
-              sa4 = name;
-            } else if (time_of_day==='Dinner') {
-              sa5 = name;
-            }
-          } else if (day_of_wk==='Sunday') {
-            if (time_of_day==='Breakfast') {
-              su1 = name;
-            } else if (time_of_day==='Snack 1') {
-              su2 = name;
-            } else if (time_of_day==='Lunch') {
-              su3 = name;
-            } else if (time_of_day==='Snack 2') {
-              su4 = name;
-            } else if (time_of_day==='Dinner') {
-              su5 = name;
-            }
-          }
-        })}
+          })
+          : ''
+        }
 
         <table className='calendar'>
           <thead>
