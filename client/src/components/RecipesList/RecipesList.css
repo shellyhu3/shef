@@ -12,8 +12,8 @@
   grid-auto-rows: 1fr;
   grid-gap: 10px;
   width: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .loading{
@@ -24,27 +24,21 @@
   letter-spacing: 0.4em;
 }
 
+.steps_container{
+  height: 350px;
+  display: grid;
+  align-items: center;
+}
+
 @media only screen and (max-width: 900px){
   .card_container{
-    grid-template-columns: 10px repeat(5, 55%) 10px;
+    grid-template-columns: 10px repeat(5, 60%) 10px;
   }
 }
 
 @media only screen and (max-width: 700px){
-  .card_container{
-    grid-template-columns: 10px repeat(5, 40%) 10px;
-  }
 
-  .card_container_blank{
+  .steps_container{
     height: 250px;
-    grid-gap: 18px;
-  }
-
-  .big_icon{
-    width: 50px;
-  }
-
-  .med_title{
-    font-size: 0.9em;
   }
 }

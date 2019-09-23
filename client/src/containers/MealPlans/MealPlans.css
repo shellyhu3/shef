@@ -2,28 +2,31 @@
   width: 100%;
   /* border: thin solid black; */
   border-collapse: collapse;
-  box-shadow: 5px 5px 5px rgba(97, 97, 134, 0.3);
+  box-shadow: 5px 5px 5px rgba(122, 122, 148, 0.3);
   margin-bottom: 10px;
+  border: thin solid rgba(122, 122, 148, 0.3);
+
 }
 
 .calendar td{
-  border: thin solid rgba(97, 97, 134, 0.3);
+  border: thin solid rgba(122, 122, 148, 0.3);
   width: 12.5%;
   height: 50px;
   text-align: center;
-  font-size: 0.8em;
 }
 
 .calendar th{
   width: 12.5%;
   height: 30px;
   font-weight: normal;
+  border: thin solid rgba(122, 122, 148, 0.3);
+
 }
 
-.calendar thead tr th{
+/* .calendar thead tr th{
   border-top: 0;
-  border-left: thin solid rgba(97, 97, 134, 0.3);
-  border-right: thin solid rgba(97, 97, 134, 0.3);
+  border-left: thin solid rgba(122, 122, 148, 0.3);
+  border-right: thin solid rgba(122, 122, 148, 0.3);
 }
 
 .calendar tr:last-child th, .calendar tr:last-child td{
@@ -36,42 +39,42 @@
 
 .calendar tr td:last-child, .calendar tr th:last-child{
   border-right: 0;
-}
+} */
 
 .calendar_main{
-  background-color: rgba(97, 97, 134, 0.05);
+  background: rgba(122, 122, 148, 0.1);
+}
+
+.calendar_main td{
+  font-size: 0.7em;
 }
 
 .macros th, .macros td{
-  background-color: rgba(97, 97, 134, 0.185);
+  background-color: white;
   text-transform: uppercase;
   letter-spacing: 0.2em;
+  font-size: 0.8em;
+}
+
+.macros td{
+  font-size: 0.8em;
 }
 
 .sm_screen{
   display: none;
 }
 
-.big_screen{
-  border-top: thin solid rgba(97, 97, 134, 0.3);
-  border-bottom: thin solid rgba(97, 97, 134, 0.3);
-}
-
-.gradient_title{
-  background: linear-gradient(to right, rgba(97, 97, 134, 0.185), white);
-  margin: 5px 0;
-  position: relative;
-  left: -20px;
-  padding: 5px 0 5px 20px;
-  text-transform: uppercase;
-}
+/* .big_screen{
+  border-top: thin solid rgba(122, 122, 148, 0.3);
+  border-bottom: thin solid rgba(122, 122, 148, 0.3);
+} */
 
 
 @media only screen and (max-width: 700px){
   .sm_screen{
     display: table-cell;
-    border-top: thin solid rgba(97, 97, 134, 0.3);
-    border-bottom: thin solid rgba(97, 97, 134, 0.3);
+    /* border-top: thin solid rgba(122, 122, 148, 0.3);
+    border-bottom: thin solid rgba(122, 122, 148, 0.3); */
   }
 
   .big_screen{

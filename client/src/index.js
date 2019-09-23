@@ -4,11 +4,14 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ParallaxProvider>
+    <Router>
+      <App />
+    </Router>
+  </ParallaxProvider>,
   document.getElementById('root')
 );
 

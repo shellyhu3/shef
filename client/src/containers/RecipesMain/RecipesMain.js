@@ -46,7 +46,7 @@ class RecipesMain extends React.Component {
   render() {
     return(
       <div className='container'>
-        <p className='title'>Recipes</p>
+        <p className='title gradient_title'>Recipes</p>
         <SearchBar searchField={this.state.searchField} onInputChange={this.onInputChange} onSearchSubmit={this.onSearchSubmit}/>
         <ErrorBoundary>
           <RecipesList pathMatch={this.props.match} recipes={this.state.recipes} loading={this.state.loading}/>

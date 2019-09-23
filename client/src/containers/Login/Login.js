@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import './Login.css';
 
 
 class Login extends React.Component {
@@ -61,45 +62,30 @@ class Login extends React.Component {
   render(){
     return (
       <div className='container'>        
-        <main className="pa4 black-80">
-          <form className="measure center">
-            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-              <legend className="f4 fw6 ph0 mh0">Login</legend>
-              {this.state.errors ? <p className='error'>{this.state.errors.login}</p> : ''}
-              <div className="mt3">
-                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                <input 
-                  onChange={this.onEmailChange}
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                  type="email" 
-                  name="email-address"  
-                  id="email-address"
-                  autoComplete="on"
-                />
-              </div>
-              <div className="mv3">
-                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                <input 
-                  onChange={this.onPwChange}
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                  type="password" 
-                  name="password"  
-                  id="password"
-                  autoComplete="off"
-                />
-              </div>
-            </fieldset>
-            <div className="test">
-              <input
-                onClick={this.onLoginSubmit}
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-                type="submit" 
-                value="Login"
+        <main>
+          <p className='gradient_title title'>Login</p>
+          <form>
+            {this.state.errors ? <p className='error'>{this.state.errors.login}</p> : ''}
+            <div>
+              <label className='sm_title' htmlFor='email-address'>Email</label>
+              <input 
+                onChange={this.onEmailChange}
+                type='email' 
+                name='email-address'
+                autoComplete='on'
               />
             </div>
-            <div className="lh-copy mt3">
-              <p onClick={this.showRegister} className="f6 link dim black db nav_link">Register</p>
+            <div>
+              <label className='sm_title' htmlFor='password'>Password</label>
+              <input 
+                onChange={this.onPwChange}
+                type='password' 
+                name='password'  
+                autoComplete='off'
+              />
             </div>
+            <button className='submit_btn' onClick={this.onLoginSubmit}>Login</button>
+            <p onClick={this.showRegister} className='sm_title nav_link'>Register</p>
           </form>
         </main>
 

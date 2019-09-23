@@ -13,12 +13,12 @@ const RecipesList = ({recipes, pathMatch, loading}) => {
         <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
       </div>
     )
-  }
-
-  if (recipes.length === 0) {
+  } else if (recipes.length === 0) {
     return (
       <div>
-        <Steps />
+        <div className='steps_container'>
+          <Steps />
+        </div>
         <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
       </div>
     )

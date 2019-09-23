@@ -4,7 +4,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr) ;
   align-items: center;
-  height: 350px;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .med_opacity{
@@ -12,7 +13,8 @@
 }
 
 .big_icon{
-  width: 100px;
+  width: 70px;
+  padding: 10px 0;
 }
 
 .med_title{
@@ -20,4 +22,18 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   line-height: 2em;
+}
+
+@media only screen and (max-width: 800px){
+  .card_container_blank{
+    width: 100%;
+  }
+
+  .big_icon{
+    width: 50px;
+  }
+
+  .med_title{
+    font-size: 0.8em;
+  }
 }

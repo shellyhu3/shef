@@ -1,5 +1,6 @@
 .search_bar{
   text-align: center;
+  margin-top: 15px;
 }
 
 .input{
@@ -12,7 +13,6 @@
   transition: 0.4s;
   border-radius: 0px;
   font-size: 16px;
-  font-family: Merriweather, sans-serif;
 }
 
 .input:hover, .input:focus{
@@ -24,7 +24,7 @@
 }
 
 .input:focus{
-  background-color: rgba(97, 97, 134, 0.15);
+  background-color: rgba(122, 122, 148, 0.15);
 }
 
 .search_btn{
@@ -36,15 +36,21 @@
   padding: 0 15px;
   margin-left: 10px;
   font-size: 16px;
-  font-family: Merriweather, sans-serif;
+  text-transform: lowercase;
 }
 
 
 .search_btn:focus{
   outline: none;
+  background-color: transparent;
 }
 
 .search_btn:hover{
-  background-color: rgba(97, 97, 134, 0.15);
+  background-color: rgba(122, 122, 148, 0.15);
 }
 
+@media (hover: none){
+  .search_btn:hover{
+    background-color: inherit;
+  }
+}

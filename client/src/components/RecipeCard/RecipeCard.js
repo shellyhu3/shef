@@ -11,7 +11,8 @@ const RecipeCard = ({name, desc, img, nutri}) => {
     <div className='card'>
       <img className='recipe_img' src = {img} alt={desc}/>
       <p className='title'>{name}</p>
-      <p>Cal: {nutri.calories}, P: {nutri.protein}g, C: {nutri.carbohydrate}g, F: {nutri.fat}g</p>
+      <p>Cal: {Math.round(nutri.calories)}</p>
+      <p>P: {Math.round(nutri.protein)}g | C: {Math.round(nutri.carbohydrate)}g | F: {Math.round(nutri.fat)}g</p>
     </div>
   )
 }

@@ -7,7 +7,7 @@ const ShoppingList = ({ingredients}) => {
   })
   return (
     <div>
-      <p className='title gradient_title'>Shopping List</p>
+      <p className='title gradient_title'>Grocery List</p>
         <div className='shopping_list'>
           {no_dupe_ingreds.sort().map((ingred, i) => {
             return <p key={i}>{ingred}</p>

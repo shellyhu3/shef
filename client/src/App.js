@@ -7,7 +7,10 @@ import MealPlans from './containers/MealPlans/MealPlans';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-
+import search_icon from './search_icon.png';
+import login_icon from './user.png';
+import plan_icon from './plan_icon.png';
+import logout_icon from './logout.png';
 
 import './App.css';
 
@@ -69,26 +72,38 @@ class App extends React.Component {
       <div>
         <nav>
           <ul>
-            <li className='name'>Shef</li>
+            <li><Link to='/' className='name'>Shef</Link></li>
             {this.state.isLoggedIn ? 
-              <li className='links_logged_in'>
-                <Link to='/' className='nav_link'>Home</Link>
-                <Link to='/recipes' className='nav_link'>Recipes</Link>
-                <Link to='/plans' className='nav_link'>Meal Plans</Link>
-                <p onClick={this.logout} className='nav_link'>Logout</p>
-              </li>
+              <div>
+                <li className='links_logged_in'>
+                  <Link to='/recipes' className='nav_link'>recipes</Link>
+                  <Link to='/plan' className='nav_link'>meal plan</Link>
+                  <p onClick={this.logout} className='nav_link'>logout</p>
+                </li>
+                <li className='links_logged_in_mobile'>
+                  <Link to='/recipes' className='nav_link'><img src={search_icon} alt='search recipes'/></Link>
+                  <Link to='/plan' className='nav_link'><img src={plan_icon} alt='your meal plan'/></Link>
+                  <p onClick={this.logout} className='nav_link'><img src={logout_icon} alt='logout'/></p>
+                </li>
+              </div>
               : 
-              <li className='links_logged_out'>              
-                <Link to='/' className='nav_link'>Home</Link>
-                <Link to='/recipes' className='nav_link'>Recipes</Link>
-                <Link to='/login' className='nav_link'>Login</Link>
-              </li>
+              <div>
+                <li className='links_logged_out'>              
+                  <Link to='/recipes' className='nav_link'>recipes</Link>
+                  <Link to='/login' className='nav_link'>login</Link>
+                </li>
+                <li className='links_logged_out_mobile'>              
+                  <Link to='/recipes' className='nav_link'><img src={search_icon} alt='search recipes'/></Link>
+                  <Link to='/login' className='nav_link'><img src={login_icon} alt='login'/></Link>
+                </li>
+
+              </div>
             }
           </ul>
         </nav>
         <Route path = '/' exact component={Home} />
         <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn} />} />
-        <PrivateRoute path = '/plans' component={MealPlans} />
+        <PrivateRoute path = '/plan' component={MealPlans} />
         <Route path = '/login' render={() => <Login loadUser = {this.loadUser} />}/>
         <Route path = '/register' render={() => <Register loadUser = {this.loadUser} />}/>
       </div>
