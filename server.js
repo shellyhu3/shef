@@ -52,4 +52,4 @@ app.get('/foods/:user_id', meals.getIngredients(db))
 
 app.delete('/meals/:id', meals.deleteMeal(db))
 
-app.listen(8000, () => console.log('listening on 8000'));
+app.listen(process.env.PORT || 8000, () => console.log(`listening on ${process.env.PORT}`));
