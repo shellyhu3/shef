@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
-import 'tachyons';
 import RecipesMain from './containers/RecipesMain/RecipesMain';
 import Home from './components/Home/Home';
 import MealPlans from './containers/MealPlans/MealPlans';

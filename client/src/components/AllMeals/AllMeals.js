@@ -13,7 +13,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -38,7 +37,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -63,7 +61,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -88,7 +85,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -113,7 +109,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -138,7 +133,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}
@@ -163,7 +157,6 @@ const AllMeals = ({meals, onDelete}) => {
             return <Meal 
             key = {id}
             id = {id}
-            day_of_wk = {day_of_wk}
             time_of_day = {time_of_day}
             name = {name}
             calories = {calories}

@@ -32,9 +32,7 @@ const addMeals = (db) => (req, res) => {
     })
     .select('plan_id')
     .then(data => {
-      console.log('plan', data)
       if (data.length) {
-        console.log('plan found')
         db('meals')
           .returning('*')
           .insert({
@@ -51,7 +49,6 @@ const addMeals = (db) => (req, res) => {
             res.json(errors)
           })
       } else {
-        console.log('plan not found')
         db.transaction(trx => {
           trx('meal_plans')
             .returning('plan_id')
@@ -59,7 +56,6 @@ const addMeals = (db) => (req, res) => {
               user_id: user_id
             })
             .then(plan_id => {
-              console.log('new plan', plan_id[0], recipe_id)
               return trx('meals')
                 .returning('*')
                 .insert({
@@ -69,7 +65,6 @@ const addMeals = (db) => (req, res) => {
                   time_of_day: time_of_day
                 })
                 .then(meal => {
-                  console.log(meal)
                   res.json(meal[0])
                 })
                 .catch(err => console.log(err))

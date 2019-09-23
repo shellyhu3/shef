@@ -139,7 +139,6 @@ class MealPlan extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('deleted', data)
         this.setState(initialState);
         this.getPlan(user_id);
         this.getPlanDetails(user_id);
@@ -249,7 +248,6 @@ class MealPlan extends React.Component {
           : ''
         }
 
-        {console.log(m5)}
         <table className='calendar'>
           <thead>
             <tr className='calendar_main'>

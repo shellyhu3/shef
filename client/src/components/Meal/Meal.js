@@ -1,7 +1,7 @@
 import React from 'react';
 import './Meal.css';
 
-const Meal = ({id, day_of_wk, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id, onDelete}) => {
+const Meal = ({id, time_of_day, name, calories, protein, fat, carbohydrate, recipe_id, onDelete}) => {
   return (
     <div className='meal_item'>
 

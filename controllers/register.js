@@ -36,7 +36,6 @@ const handleRegister = (db, bcrypt, saltRounds, jwt, TOKEN_SECRET) => (req, res)
         } 
       } else {
         if (Object.keys(errors).length != 0) {
-          console.log(errors)
           return res.json(errors);
         } 
         //if email doesn't exist

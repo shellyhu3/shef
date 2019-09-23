@@ -110,6 +110,11 @@ a:hover:not(.name):not(.nav_link):not(.grid_btn){
 
 input{
   font-size: 16px;
+  font-family: Merriweather, sans-serif;
+}
+
+button{
+  font-family: Merriweather, sans-serif;
 }
 
 .error_msg{

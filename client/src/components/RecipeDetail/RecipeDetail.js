@@ -35,12 +35,10 @@ class RecipeDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log('print',this.props.match.url);
     const search_id = this.props.match.params.id;
     this.callBackendAPI(search_id)
     .then(resp => {
       this.setState({recipe: resp.recipe})
-      console.log('heres the recipe', resp.recipe)
     })
     .catch(err => console.log(err));
   }
@@ -54,7 +52,6 @@ class RecipeDetail extends React.Component {
         this.setState({errors: {}});
         this.setState({success: ''});
         this.setState({recipe: resp.recipe})
-        console.log('heres the recipe', resp.recipe)
       })
       .catch(err => console.log(err));
       }
@@ -151,7 +148,6 @@ class RecipeDetail extends React.Component {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('data', data)
           if(!data.id){
             this.setState({errors: data})
           } else {
