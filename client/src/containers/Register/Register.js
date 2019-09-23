@@ -39,7 +39,7 @@ class Register extends React.Component {
   onRegisterSubmit = (event) => {
     event.preventDefault();
     const {first_name, last_name, email, pw} = this.state;
-    fetch('http://localhost:8000/register', {
+    fetch('/register', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

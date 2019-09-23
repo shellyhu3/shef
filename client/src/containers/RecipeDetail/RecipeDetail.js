@@ -4,7 +4,7 @@ import serving_size from './serving_size.png';
 import timer from './timer.png';
 import calories from './calories.png';
 import macros from './macros.png';
-import meal_prep from '../RecipeCard/meal_prep.jpeg'
+import meal_prep from '../../components/RecipeCard/meal_prep.jpeg'
 
 class RecipeDetail extends React.Component {
   constructor(props){

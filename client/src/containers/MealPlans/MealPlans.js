@@ -73,7 +73,7 @@ class MealPlan extends React.Component {
 
 
   getPlan = (user_id) => {
-    fetch(`http://localhost:8000/meals/${user_id}`, {
+    fetch(`/meals/${user_id}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -85,7 +85,7 @@ class MealPlan extends React.Component {
   }
 
   getPlanDetails = (user_id) => {
-    fetch(`http://localhost:8000/meals_foods/${user_id}`, {
+    fetch(`/meals_foods/${user_id}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -109,7 +109,7 @@ class MealPlan extends React.Component {
   }
 
   getIngreds = (user_id) => {
-    fetch(`http://localhost:8000/foods/${user_id}`, {
+    fetch(`/foods/${user_id}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -133,7 +133,7 @@ class MealPlan extends React.Component {
 
   onDelete = (id) => {
     const user_id = localStorage.getItem('id');
-    fetch(`http://localhost:8000/meals/${id}`, {
+    fetch(`/meals/${id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
     })

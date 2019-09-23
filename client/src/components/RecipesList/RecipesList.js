@@ -2,7 +2,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom'
 import { Route, Link } from 'react-router-dom';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import RecipeDetail from '../RecipeDetail/RecipeDetail';
+import RecipeDetail from '../../containers/RecipeDetail/RecipeDetail';
 import Steps from '../Steps/Steps';
 import './RecipesList.css';
 

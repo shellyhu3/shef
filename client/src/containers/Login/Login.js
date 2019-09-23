@@ -30,7 +30,7 @@ class Login extends React.Component {
   onLoginSubmit = (event) => {
     event.preventDefault();
     const {loginEmail, loginPw} = this.state;
-    fetch('http://localhost:8000/login', {
+    fetch('/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
