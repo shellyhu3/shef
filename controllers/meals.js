@@ -69,8 +69,10 @@ const addMeals = (db) => (req, res) => {
                   time_of_day: time_of_day
                 })
                 .then(meal => {
+                  console.log(meal)
                   res.json(meal[0])
                 })
+                .catch(err => console.log(err))
             })
             .then(trx.commit)
             .catch(trx.rollback)
