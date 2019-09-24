@@ -69,7 +69,7 @@ class RecipesList extends React.Component{
             : ''
           }
 
-          <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/>
+        <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
 
         </div>
       )
