@@ -123,8 +123,8 @@ button{
 .error_msg{
   text-align: center;
   padding-top: 15px;
-  width: 100vw;
-  box-sizing: border-box;
+  width: 90vw;
+  margin: 0 auto;
 }
 
 .center{

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import RecipesList from '../../components/RecipesList/RecipesList';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
-import RecipeDetail from '../RecipeDetail/RecipeDetail';
 
 
 class RecipesMain extends React.Component {
@@ -34,10 +33,12 @@ class RecipesMain extends React.Component {
   }
 
   onSearchSubmit = () => {
+    console.log('submitted')
     this.setState({loading: true})
     this.setState({page: 0})
     this.callBackendAPI(this.state.searchField, 0)
       .then(resp => {
+        console.log(resp)
         this.setState({recipes: resp.recipes.recipe})
         this.setState({loading: false})
         this.setState({resetScroll: true})
@@ -58,6 +59,7 @@ class RecipesMain extends React.Component {
   }
 
   render() {
+    console.log(this.state.recipes)
     return(
       <div className='container'>
         <p className='title gradient_title'>Recipes</p>
