@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import RecipesList from '../../components/RecipesList/RecipesList';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import RecipeDetail from '../RecipeDetail/RecipeDetail';
 
 
 class RecipesMain extends React.Component {

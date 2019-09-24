@@ -49,32 +49,32 @@ class RecipesList extends React.Component{
       )
     } else if (!recipes.length) {
       recipes = [recipes];
+
+      return(
+        <div className='card_container' ref={this.horizontalScroll}>
+          {recipes.map(recipe => {
+            const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
+            return (
+              <Link to = {`${pathMatch.url}/${recipe_id}`} key = {recipe_id}>
+                <RecipeCard
+                  name = {recipe_name}
+                  desc = {recipe_description}
+                  img = {recipe_image}
+                  nutri = {recipe_nutrition}
+                />
+              </Link>
+            )
+          })}
+          {recipes.length === 20
+            ? <button className='next_btn' onClick={nextPg}>More</button>
+            : ''
+          }
+
+          <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/>
+
+        </div>
+      )
     }
-
-    return(
-      <div className='card_container' ref={this.horizontalScroll}>
-        {recipes.map(recipe => {
-          const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
-          return (
-            <Link to = {`${pathMatch.url}/${recipe_id}`} key = {recipe_id}>
-              <RecipeCard
-                name = {recipe_name}
-                desc = {recipe_description}
-                img = {recipe_image}
-                nutri = {recipe_nutrition}
-              />
-            </Link>
-          )
-        })}
-        {recipes.length === 20
-          ? <button className='next_btn' onClick={nextPg}>More</button>
-          : ''
-        }
-
-        <Route path = {`${pathMatch.url}/:id`} component={RecipeDetail}/>
-
-      </div>
-    )
   }
 }
 
