@@ -76,9 +76,9 @@ const addMeals = (db) => (req, res) => {
               })
         }
       })
+      .then(trx.commit)
+      .catch(trx.rollback)
   })
-  .then(trx.commit)
-  .catch(trx.rollback)
 
 
 
