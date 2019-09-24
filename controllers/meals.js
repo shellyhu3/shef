@@ -104,6 +104,11 @@ const addMeals = (db) => (req, res) => {
                 })
             } else {
               console.log('plan doesnt exist')
+              db('foods')
+                .where({recipe_id: 43704})
+                .returning('*')
+                .then(data=>console.log(data))
+
               db.transaction(trx => {
                 trx.insert({
                   user_id: user_id
