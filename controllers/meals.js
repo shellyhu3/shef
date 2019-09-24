@@ -109,16 +109,20 @@ const addMeals = (db) => (req, res) => {
                 .returning('*')
                 .then(data=>console.log(data))
 
+              db('foods')
+                .where({recipe_id: 43704})
+                .returning('*')
+                .then(data=>console.log(data))
+
               db.transaction(trx => {
-                db.insert({
+                trx.insert({
                   user_id: user_id
                 })
                 .into('meal_plans')
                 .returning('plan_id')
-                .transacting(trx)
                 .then(plan_id => {
                   console.log('plan created', plan_id)
-                  return db('meals')
+                  return trx('meals')
                     .returning('*')
                     .insert({
                       plan_id: plan_id[0],
@@ -126,25 +130,16 @@ const addMeals = (db) => (req, res) => {
                       day_of_wk: day_of_wk,
                       time_of_day: time_of_day
                     })
-                    .transacting(trx)
                     .then(meal => {
                       console.log(meal)
-                      trx.commit
-                      // res.json(meal[0])
+                      res.json(meal[0])
                     })
-                    .catch(err => {
-                      console.log(err)
-                      trx.rollback
-                    })
+                    .catch(err => console.log(err))
                 })
-                .then(meal => {
-                  console.log(meal)
-                })
-                .catch(err => {
-                  console.log(error)
-                })
+                .then(trx.commit)
+                .catch(trx.rollback)
               })
-              // .catch(err => res.json('transaction error'))
+              .catch(err => res.json('transaction error'))
             }
           })
       }
