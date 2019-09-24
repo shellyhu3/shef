@@ -124,6 +124,7 @@ button{
   text-align: center;
   padding-top: 15px;
   width: 100vw;
+  box-sizing: border-box;
 }
 
 .center{
