@@ -41,7 +41,7 @@ function makeApiCall(methodParams, httpMethod = 'GET') {
     .catch(err=> console.log(err));
 }
 
-async function searchRecipe(query=' ', maxResults=20, pageNum=0){
+async function searchRecipe(query='a', maxResults=20, pageNum=0){
   const methodParams = {
     method: 'recipes.search',
     max_results: maxResults,

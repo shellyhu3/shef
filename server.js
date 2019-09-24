@@ -58,8 +58,8 @@ app.delete('/api/meals/:id', meals.deleteMeal(db))
 
 // // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
-  // res.sendFile(path.join(__dirname + '/client/build/index.html'))
-  res.redirect('/')
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  // res.redirect('/')
 })
 
 app.listen(process.env.PORT || 8000, () => console.log(`listening on ${process.env.PORT}`));
