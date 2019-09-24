@@ -8,6 +8,7 @@ const addMeals = (db) => (req, res) => {
     .select('recipe_id')
     .then(data => {
       if(!data.length) {
+        console.log('no food found')
         db('foods')
           .returning('recipe_id')
           .insert({
@@ -30,6 +31,7 @@ const addMeals = (db) => (req, res) => {
               .then(data => {
                 console.log(data)
                 if (data.length) {
+                  console.log('meal plan exists')
                   db('meals')
                     .returning('*')
                     .insert({
@@ -46,6 +48,7 @@ const addMeals = (db) => (req, res) => {
                       res.json(errors)
                     })
                 } else {
+                  console.log('plan doesnt exist')
                   db.transaction(trx => {
                     trx('meal_plans')
                       .returning('plan_id')
@@ -74,6 +77,7 @@ const addMeals = (db) => (req, res) => {
               })
           })
       } else {
+        console.log('food found found')
         db('meal_plans')
           .where({
             user_id: user_id
@@ -81,6 +85,7 @@ const addMeals = (db) => (req, res) => {
           .select('plan_id')
           .then(data => {
             if (data.length) {
+              console.log('plan exists')
               db('meals')
                 .returning('*')
                 .insert({
@@ -90,6 +95,7 @@ const addMeals = (db) => (req, res) => {
                   time_of_day: time_of_day
                 })
                 .then(meal => {
+                  console.log(meal)
                   res.json(meal[0]);
                 })
                 .catch(err => {
@@ -97,6 +103,7 @@ const addMeals = (db) => (req, res) => {
                   res.json(errors)
                 })
             } else {
+              console.log('plan doesnt exist')
               db.transaction(trx => {
                 trx('meal_plans')
                   .returning('plan_id')
@@ -113,6 +120,7 @@ const addMeals = (db) => (req, res) => {
                         time_of_day: time_of_day
                       })
                       .then(meal => {
+                        console.log(meal)
                         res.json(meal[0])
                       })
                       .catch(err => console.log(err))
