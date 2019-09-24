@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 
 
 
-app.get('/api/recipes/:ingred1?/:pg', (req,res) => {
+app.get('/api/recipes/:ingred1/:pg', (req,res) => {
   api.searchRecipe(req.params.ingred1, 20, req.params.pg)
     .then(data=>res.json(data))
     .catch(err=>res.json(err));
@@ -58,7 +58,8 @@ app.delete('/api/meals/:id', meals.deleteMeal(db))
 
 // // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  // res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  res.redirect('/')
 })
 
 app.listen(process.env.PORT || 8000, () => console.log(`listening on ${process.env.PORT}`));

@@ -122,7 +122,6 @@ class RecipeDetail extends React.Component {
   }
 
   addRecipe = () => {
-    console.log('clicked')
     this.setState({errors: {}});
     this.setState({success: ''});
     const {recipe_id, recipe_name, serving_sizes} = this.state.recipe;
@@ -131,7 +130,6 @@ class RecipeDetail extends React.Component {
       return(ingred.food_name);
     });
     if (localStorage.getItem('jwt_token')) {
-      console.log('adding')
       fetch('/api/meals', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
