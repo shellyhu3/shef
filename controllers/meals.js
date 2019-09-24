@@ -111,6 +111,7 @@ const addMeals = (db) => (req, res) => {
                     user_id: user_id
                   })
                   .then(plan_id => {
+                    console.log('plan created', plan_id)
                     return trx('meals')
                       .returning('*')
                       .insert({
