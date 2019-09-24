@@ -29,6 +29,7 @@ const addMeals = (db) => (req, res) => {
               .select('plan_id')
               .then(data => {
                 if (data.length) {
+                  console.log('meal plan found')
                   db('meals')
                     .returning('*')
                     .insert({
