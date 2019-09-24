@@ -110,7 +110,7 @@ const addMeals = (db) => (req, res) => {
                 .then(data=>console.log(data))
 
               db.transaction(trx => {
-                trx.insert({
+                return trx.insert({
                   user_id: user_id
                 })
                 .into('meal_plans')
