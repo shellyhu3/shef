@@ -10,6 +10,15 @@ const db = require('knex')({
     ssl: true
   }
 });
+// const db = require('knex')({
+//   client: 'pg',
+//   connection: {
+//     host: '127.0.0.1',
+//     user: 'shell',
+//     password: 'root',
+//     database: 'shef'
+//   }
+// });
 const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = 'aoufhakdfmberh';
 
