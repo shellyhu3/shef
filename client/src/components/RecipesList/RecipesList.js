@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom'
 import { Route, Link } from 'react-router-dom';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import RecipeDetail from '../../containers/RecipeDetail/RecipeDetail';
@@ -27,6 +26,7 @@ class RecipesList extends React.Component{
     const {pathMatch, loading, nextPg} = this.props;
     let {recipes} = this.props;
 
+
     if (loading) {
       return (
         <div className='loading'>
@@ -34,21 +34,7 @@ class RecipesList extends React.Component{
           <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
         </div>
       )
-    } else if (!recipes || recipes.length === 0) {
-      return (
-        <div>
-          {!recipes
-            ? <p className='error center'>no recipes found</p>
-            : ''
-          }
-          <div className='steps_container'>
-            <Steps />
-          </div>
-          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-        </div>
-      )
     } else if (recipes.length) {
-
       return(
         <div className='card_container' ref={this.horizontalScroll}>
           {recipes.map((recipe, i) => {
@@ -68,17 +54,23 @@ class RecipesList extends React.Component{
             ? <button className='next_btn' onClick={nextPg}>More</button>
             : ''
           }
-
-        <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-
+          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
         </div>
       )
     } else {
-      return(
-        <div className='steps_container'>
-          <Steps />
+      return (
+        <div>
+          {!recipes
+            ? <p className='error center'>no recipes found</p>
+            : ''
+          }
+          <div className='steps_container'>
+            <Steps />
+          </div>
+          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
         </div>
       )
+
     }
   }
 }

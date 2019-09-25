@@ -17,6 +17,8 @@ class RecipesMain extends React.Component {
     }
   }
 
+
+
   callBackendAPI = async (search, pg) => {
     const response = await fetch(`/api/recipes/${pg}/${search}`);
     const body = await response.json();
@@ -33,12 +35,10 @@ class RecipesMain extends React.Component {
   }
 
   onSearchSubmit = () => {
-    console.log('submitted')
     this.setState({loading: true})
     this.setState({page: 0})
     this.callBackendAPI(this.state.searchField, 0)
       .then(resp => {
-        console.log(resp)
         this.setState({recipes: resp.recipes.recipe})
         this.setState({loading: false})
         this.setState({resetScroll: true})
@@ -59,7 +59,6 @@ class RecipesMain extends React.Component {
   }
 
   render() {
-    console.log(this.state.recipes)
     return(
       <div className='container'>
         <p className='title gradient_title'>Recipes</p>
@@ -77,6 +76,13 @@ class RecipesMain extends React.Component {
             resetScroll={this.state.resetScroll}
           />
         </ErrorBoundary>
+        {/* {this.props.match.params.id
+          ? <RecipeDetail pathMatch={this.props.match} />
+          : ''
+        } */}
+
+        {/* <Route path = {`${this.props.match.url}/:id`} render={(props) => <RecipeDetail {...props} />}/> */}
+
       </div>
     )
   }

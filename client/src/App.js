@@ -6,6 +6,7 @@ import MealPlans from './containers/MealPlans/MealPlans';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+// import RecipeDetail from './containers/RecipeDetail/RecipeDetail';
 import search_icon from './search_icon.png';
 import login_icon from './user.png';
 import plan_icon from './plan_icon.png';
@@ -98,7 +99,9 @@ class App extends React.Component {
           </ul>
         </nav>
         <Route path = '/' exact component={Home} />
-        <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn} />} />
+        <Route path = '/recipes' render={(props) => <RecipesMain {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn} />}/>
+          {/* <Route path = '/recipes/:id' render={(props) => <RecipeDetail {...props} />}/>
+        </Route> */}
         <PrivateRoute path = '/plan' component={MealPlans} />
         <Route path = '/login' render={() => <Login loadUser = {this.loadUser} />}/>
         <Route path = '/register' render={() => <Register loadUser = {this.loadUser} />}/>

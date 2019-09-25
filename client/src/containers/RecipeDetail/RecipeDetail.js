@@ -6,55 +6,78 @@ import calories from './calories.png';
 import macros from './macros.png';
 import meal_prep from '../../components/RecipeCard/meal_prep.jpeg'
 
+const initialState = {
+  recipe: {
+    recipe_name: '',
+    recipe_description: '', 
+    recipe_image: '', 
+    serving_sizes: {
+      serving: {}
+    }, 
+    preparation_time_min: 0, 
+    cooking_time_min: 0, 
+    number_of_servings: 0, 
+    ingredients: {
+      ingredient: []
+    }, 
+    directions: {
+      direction: []
+    }
+  },
+  errors: {},
+  success: '',
+  day_of_wk: 'Monday',
+  time_of_day: 'Breakfast',
+  api_error: ''
+}
+
 class RecipeDetail extends React.Component {
+  _isMounted = false;
+
   constructor(props){
     super(props);
-    this.state = {
-      recipe: {
-        recipe_name: '',
-        recipe_description: '', 
-        recipe_image: '', 
-        serving_sizes: {
-          serving: {}
-        }, 
-        preparation_time_min: 0, 
-        cooking_time_min: 0, 
-        number_of_servings: 0, 
-        ingredients: {
-          ingredient: []
-        }, 
-        directions: {
-          direction: []
-        }
-      },
-      errors: {},
-      success: '',
-      day_of_wk: 'Monday',
-      time_of_day: 'Breakfast'
-    }
+    this.state = initialState;
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     const search_id = this.props.match.params.id;
     this.callBackendAPI(search_id)
     .then(resp => {
-      this.setState({recipe: resp.recipe})
+      if (this._isMounted){
+        if (resp.recipe) {
+          this.setState({recipe: resp.recipe})
+        } else {
+          this.setState({api_error: resp.error.message})
+        }
+      }
     })
     .catch(err => console.log(err));
   }
 
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
+
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.match.params.id !== prevProps.match.params.id) {
+    if (this.props.match.url !== prevProps.match.url) {
+      console.log('remounted')
       const search_id = this.props.match.params.id;
       this.callBackendAPI(search_id)
       .then(resp => {
+        console.log(resp)
         this.setState({errors: {}});
         this.setState({success: ''});
-        this.setState({recipe: resp.recipe})
+        if (resp.recipe) {
+          this.setState({recipe: resp.recipe})
+        } else {
+          this.setState({api_error: resp.error.message})
+        }
       })
       .catch(err => console.log(err));
-      }
+    }
   }
 
   callBackendAPI = async (recipe_id) => {
@@ -159,14 +182,14 @@ class RecipeDetail extends React.Component {
     }
   }
 
-  
+
   render(){
     const {recipe_name, recipe_description, serving_sizes, number_of_servings, ingredients} = this.state.recipe;
     let {preparation_time_min, cooking_time_min} = this.state.recipe;
 
     const ingredientList = ingredients.ingredient.map((ingred, i) => {
       return <li key={i}>{ingred.ingredient_description}</li>
-    })
+    })  
     
     const total_time = Number(preparation_time_min) + Number(cooking_time_min);
 
@@ -177,6 +200,7 @@ class RecipeDetail extends React.Component {
 
     return(
       <div className='recipe_wrapper'>
+        {this.state.api_error ? <p>{this.state.api_error}</p> : ''}
         <div className='img_bg'>
           <img className='recipe_img_big' src={this.getImage()} alt={recipe_name}/>
         </div>
