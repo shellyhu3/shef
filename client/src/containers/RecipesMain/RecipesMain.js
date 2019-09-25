@@ -13,11 +13,10 @@ class RecipesMain extends React.Component {
       recipes:[],
       page: 0,
       loading: false,
-      resetScroll: false
+      resetScroll: false,
+      searchError: ''
     }
   }
-
-
 
   callBackendAPI = async (search, pg) => {
     const response = await fetch(`/api/recipes/${pg}/${search}`);
@@ -35,11 +34,20 @@ class RecipesMain extends React.Component {
   }
 
   onSearchSubmit = () => {
+    // this.props.history.push('/recipes');
     this.setState({loading: true})
     this.setState({page: 0})
     this.callBackendAPI(this.state.searchField, 0)
       .then(resp => {
-        this.setState({recipes: resp.recipes.recipe})
+        if (Number(resp.recipes.total_results) === 1){
+          this.setState({recipes: [resp.recipes.recipe]})
+          this.setState({searchError: ''})
+        } else if (resp.recipes.total_results > 1) {
+          this.setState({recipes: resp.recipes.recipe})
+          this.setState({searchError: ''})
+        } else {
+          this.setState({searchError: 'no recipes found'})
+        }
         this.setState({loading: false})
         this.setState({resetScroll: true})
       })
@@ -74,6 +82,7 @@ class RecipesMain extends React.Component {
             loading={this.state.loading} 
             nextPg={this.nextPage}
             resetScroll={this.state.resetScroll}
+            searchError={this.state.searchError}
           />
         </ErrorBoundary>
         {/* {this.props.match.params.id

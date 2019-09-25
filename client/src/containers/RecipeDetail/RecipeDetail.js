@@ -40,6 +40,7 @@ class RecipeDetail extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mounted')
     this._isMounted = true;
 
     const search_id = this.props.match.params.id;
@@ -57,10 +58,13 @@ class RecipeDetail extends React.Component {
   }
 
   componentWillUnmount(){
+    console.log('unmounted')
     this._isMounted = false;
   }
 
+
   componentDidUpdate(prevProps) {
+    console.log('updated')
     // Typical usage (don't forget to compare props):
     if (this.props.match.url !== prevProps.match.url) {
       console.log('remounted')
@@ -200,7 +204,7 @@ class RecipeDetail extends React.Component {
 
     return(
       <div className='recipe_wrapper'>
-        {this.state.api_error ? <p>{this.state.api_error}</p> : ''}
+        {this.state.api_error ? <p className='error center'>{this.state.api_error}</p> : ''}
         <div className='img_bg'>
           <img className='recipe_img_big' src={this.getImage()} alt={recipe_name}/>
         </div>

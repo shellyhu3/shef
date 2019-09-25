@@ -26,52 +26,118 @@ class RecipesList extends React.Component{
     const {pathMatch, loading, nextPg} = this.props;
     let {recipes} = this.props;
 
-
-    if (loading) {
-      return (
-        <div className='loading'>
-          <p>loading...</p>
-          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-        </div>
-      )
-    } else if (recipes.length) {
-      return(
-        <div className='card_container' ref={this.horizontalScroll}>
-          {recipes.map((recipe, i) => {
-            const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
-            return (
-              <Link to = {`${pathMatch.url}/${recipe_id}`} key = {i}>
-                <RecipeCard
-                  name = {recipe_name}
-                  desc = {recipe_description}
-                  img = {recipe_image}
-                  nutri = {recipe_nutrition}
-                />
-              </Link>
-            )
-          })}
-          {recipes.length === 20
-            ? <button className='next_btn' onClick={nextPg}>More</button>
-            : ''
-          }
-          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          {!recipes
-            ? <p className='error center'>no recipes found</p>
-            : ''
-          }
-          <div className='steps_container'>
-            <Steps />
+    return (
+      <div>
+        {recipes.length > 0
+          ?
+          <div>
+            {this.props.searchError
+              ? <p className='error center'>no recipes found</p>
+              : ''
+            }
+            {loading
+              ?
+              <div className='loading'>
+                <p>Loading...</p>
+              </div>
+              :
+              <div className='card_container' ref={this.horizontalScroll}>
+                {recipes.map((recipe, i) => {
+                  const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
+                  return (
+                    <Link to = {`${pathMatch.url}/${recipe_id}`} key = {i}>
+                      <RecipeCard
+                        name = {recipe_name}
+                        desc = {recipe_description}
+                        img = {recipe_image}
+                        nutri = {recipe_nutrition}
+                      />
+                    </Link>
+                  )
+                })}
+                {recipes.length === 20
+                  ? <button className='next_btn' onClick={nextPg}>More</button>
+                  : ''
+                }
+              </div>
+            }
           </div>
-          <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
-        </div>
-      )
+          :
 
-    }
+          <div>
+            {this.props.searchError
+              ? <p className='error center'>no recipes found</p>
+              : ''
+            }
+            {loading
+              ?
+              <div className='loading'>
+                <p>Loading...</p>
+              </div>
+              :
+              <div className='steps_container'>
+                <Steps />
+              </div>
+            }
+          </div>
+        }
+
+      <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
+
+      </div>
+    )
+
+    // if (loading) {
+    //   return (
+    //     <div className='loading'>
+    //       <p>loading...</p>
+    //       <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
+    //     </div>
+    //   )
+    // } else if (recipes.length > 0) {
+    //   return(
+    //     <div>
+    //       {this.props.searchError
+    //         ? <p className='error center'>no recipes found</p>
+    //         : ''
+    //       }
+    //       <div className='card_container' ref={this.horizontalScroll}>
+    //         {recipes.map((recipe, i) => {
+    //           const {recipe_id, recipe_name, recipe_description, recipe_image, recipe_nutrition} = recipe
+    //           return (
+    //             <Link to = {`${pathMatch.url}/${recipe_id}`} key = {i}>
+    //               <RecipeCard
+    //                 name = {recipe_name}
+    //                 desc = {recipe_description}
+    //                 img = {recipe_image}
+    //                 nutri = {recipe_nutrition}
+    //               />
+    //             </Link>
+    //           )
+    //         })}
+    //         {recipes.length === 20
+    //           ? <button className='next_btn' onClick={nextPg}>More</button>
+    //           : ''
+    //         }
+    //         <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
+    //       </div>
+    //     </div>
+    //   )
+    // } else {
+    //   return (
+    //     <div>
+    //       {this.props.searchError
+    //         ? <p className='error center'>no recipes found</p>
+    //         : ''
+    //       }
+    //       <div className='steps_container'>
+    //         <Steps />
+    //       </div>
+    //       <Route path = {`${pathMatch.url}/:id`} render={(props) => <RecipeDetail {...props} />}/>
+    //     </div>
+    //   )
+
+    // }
   }
 }
 
