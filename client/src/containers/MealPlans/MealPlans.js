@@ -340,17 +340,6 @@ class MealPlan extends React.Component {
               <td>{this.state.Sunday.p}</td>
             </tr>
             <tr className='macros'>
-              <th className='big_screen'>Fat</th>
-              <th className='sm_screen'>F</th>                
-              <td>{this.state.Monday.f}</td>
-              <td>{this.state.Tuesday.f}</td>
-              <td>{this.state.Wednesday.f}</td>
-              <td>{this.state.Thursday.f}</td>
-              <td>{this.state.Friday.f}</td>
-              <td>{this.state.Saturday.f}</td>
-              <td>{this.state.Sunday.f}</td>
-            </tr>
-            <tr className='macros'>
               <th className='big_screen'>Carbs</th>
               <th className='sm_screen'>C</th>                
               <td>{this.state.Monday.c}</td>
@@ -360,6 +349,17 @@ class MealPlan extends React.Component {
               <td>{this.state.Friday.c}</td>
               <td>{this.state.Saturday.c}</td>
               <td>{this.state.Sunday.c}</td>
+            </tr>
+            <tr className='macros'>
+              <th className='big_screen'>Fat</th>
+              <th className='sm_screen'>F</th>                
+              <td>{this.state.Monday.f}</td>
+              <td>{this.state.Tuesday.f}</td>
+              <td>{this.state.Wednesday.f}</td>
+              <td>{this.state.Thursday.f}</td>
+              <td>{this.state.Friday.f}</td>
+              <td>{this.state.Saturday.f}</td>
+              <td>{this.state.Sunday.f}</td>
             </tr>
           </tbody>
         </table>
