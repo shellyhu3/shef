@@ -66,6 +66,11 @@ class RecipesMain extends React.Component {
       .catch(err => console.log(err));
   }
 
+  disableHorizontalScroll = () => {
+    console.log('no scroll')
+    this.setState({resetScroll: false});
+  }
+
   render() {
     return(
       <div className='container'>
@@ -83,6 +88,7 @@ class RecipesMain extends React.Component {
             nextPg={this.nextPage}
             resetScroll={this.state.resetScroll}
             searchError={this.state.searchError}
+            disableHorizontalScroll={this.disableHorizontalScroll}
           />
         </ErrorBoundary>
         {/* {this.props.match.params.id

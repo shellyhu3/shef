@@ -40,7 +40,6 @@ class RecipeDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mounted')
     this._isMounted = true;
 
     const search_id = this.props.match.params.id;
@@ -58,20 +57,16 @@ class RecipeDetail extends React.Component {
   }
 
   componentWillUnmount(){
-    console.log('unmounted')
     this._isMounted = false;
   }
 
 
   componentDidUpdate(prevProps) {
-    console.log('updated')
     // Typical usage (don't forget to compare props):
     if (this.props.match.url !== prevProps.match.url) {
-      console.log('remounted')
       const search_id = this.props.match.params.id;
       this.callBackendAPI(search_id)
       .then(resp => {
-        console.log(resp)
         this.setState({errors: {}});
         this.setState({success: ''});
         if (resp.recipe) {
