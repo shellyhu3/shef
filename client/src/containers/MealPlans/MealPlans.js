@@ -265,57 +265,57 @@ class MealPlan extends React.Component {
             <tr className='calendar_main'>
               <th className='big_screen'>Breakfast</th>
               <th className='sm_screen'>B</th>
-              <td>{m1.join()}</td>
-              <td>{t1.join()}</td>
-              <td>{w1.join()}</td>
-              <td>{th1.join()}</td>
-              <td>{f1.join()}</td>
-              <td>{sa1.join()}</td>
-              <td>{su1.join()}</td>
+              <td>{m1.join(', ')}</td>
+              <td>{t1.join(', ')}</td>
+              <td>{w1.join(', ')}</td>
+              <td>{th1.join(', ')}</td>
+              <td>{f1.join(', ')}</td>
+              <td>{sa1.join(', ')}</td>
+              <td>{su1.join(', ')}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Snack 1</th>
               <th className='sm_screen'>S1</th>                
-              <td>{m2.join()}</td>
-              <td>{t2.join()}</td>
-              <td>{w2.join()}</td>
-              <td>{th2.join()}</td>
-              <td>{f2.join()}</td>
-              <td>{sa2.join()}</td>
-              <td>{su2.join()}</td>
+              <td>{m2.join(', ')}</td>
+              <td>{t2.join(', ')}</td>
+              <td>{w2.join(', ')}</td>
+              <td>{th2.join(', ')}</td>
+              <td>{f2.join(', ')}</td>
+              <td>{sa2.join(', ')}</td>
+              <td>{su2.join(', ')}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Lunch</th>
               <th className='sm_screen'>L</th>                
-              <td>{m3.join()}</td>
-              <td>{t3.join()}</td>
-              <td>{w3.join()}</td>
-              <td>{th3.join()}</td>
-              <td>{f3.join()}</td>
-              <td>{sa3.join()}</td>
-              <td>{su3.join()}</td>
+              <td>{m3.join(', ')}</td>
+              <td>{t3.join(', ')}</td>
+              <td>{w3.join(', ')}</td>
+              <td>{th3.join(', ')}</td>
+              <td>{f3.join(', ')}</td>
+              <td>{sa3.join(', ')}</td>
+              <td>{su3.join(', ')}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Snack 2</th>
               <th className='sm_screen'>S2</th>                
-              <td>{m4.join()}</td>
-              <td>{t4.join()}</td>
-              <td>{w4.join()}</td>
-              <td>{th4.join()}</td>
-              <td>{f4.join()}</td>
-              <td>{sa4.join()}</td>
-              <td>{su4.join()}</td>
+              <td>{m4.join(', ')}</td>
+              <td>{t4.join(', ')}</td>
+              <td>{w4.join(', ')}</td>
+              <td>{th4.join(', ')}</td>
+              <td>{f4.join(', ')}</td>
+              <td>{sa4.join(', ')}</td>
+              <td>{su4.join(', ')}</td>
             </tr>
             <tr className='calendar_main'>
               <th className='big_screen'>Dinner</th>
               <th className='sm_screen'>D</th>                
-              <td>{m5.join()}</td>
-              <td>{t5.join()}</td>
-              <td>{w5.join()}</td>
-              <td>{th5.join()}</td>
-              <td>{f5.join()}</td>
-              <td>{sa5.join()}</td>
-              <td>{su5.join()}</td>
+              <td>{m5.join(', ')}</td>
+              <td>{t5.join(', ')}</td>
+              <td>{w5.join(', ')}</td>
+              <td>{th5.join(', ')}</td>
+              <td>{f5.join(', ')}</td>
+              <td>{sa5.join(', ')}</td>
+              <td>{su5.join(', ')}</td>
             </tr>
             <tr className='macros'>
               <th className='big_screen'>Calories</th>
